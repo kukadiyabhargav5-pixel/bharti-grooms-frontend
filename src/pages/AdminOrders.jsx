@@ -142,7 +142,7 @@ const AdminOrders = () => {
     const handleDeleteOrder = async (id) => {
         if (window.confirm('Are you sure you want to cancel and delete this order?')) {
             try {
-                await axios.delete(`http://localhost:5000/api/admin/orders/${id}`);
+                await axios.delete(`${API_BASE_URL}/api/admin/orders/${id}`);
                 fetchOrders();
             } catch (error) {
                 alert('Failed to delete order');

@@ -59,7 +59,7 @@ const AdminDashboard = () => {
   const handleStockUpdate = async (productId, newStock) => {
     if (newStock < 0) return;
     try {
-      await axios.put(`http://localhost:5000/api/admin/products/${productId}/stock`, { stock: newStock });
+      await axios.put(`${API_BASE_URL}/api/admin/products/${productId}/stock`, { stock: newStock });
       fetchStats(); // Refresh dashboard data
     } catch (error) {
       console.error('Failed to update stock:', error);
