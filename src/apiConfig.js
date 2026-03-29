@@ -2,7 +2,7 @@
 // This file centralizes the backend base URL for easy switching between local and production environments.
 
 // Use the VITE_API_URL environment variable if it exists, otherwise fallback to localhost.
-export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+export const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://bharti-grooms-backend.onrender.com';
 
 // Helper for image URLs
 export const getImageUrl = (imagePath) => {
