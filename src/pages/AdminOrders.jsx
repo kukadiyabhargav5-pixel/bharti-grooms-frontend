@@ -3,7 +3,7 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import { FiHome, FiPackage, FiArrowLeft, FiSearch, FiEye, FiClock, FiBox, FiTruck, FiCheck, FiShoppingBag, FiTrash2, FiDownload } from 'react-icons/fi';
 import axios from 'axios';
 import html2pdf from 'html2pdf.js';
-import { API_BASE_URL } from '../apiConfig';
+import { API_BASE_URL, getImageUrl } from '../apiConfig';
 import '../styles/Admin.css';
 
 const AdminOrders = () => {
@@ -253,7 +253,7 @@ const AdminOrders = () => {
                                     {o.products && o.products.length > 0 && (
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '15px' }}>
                                             <img 
-                                                src={o.products[0].photo} 
+                                                src={getImageUrl(o.products[0].photo || o.products[0].image || (o.products[0].images && o.products[0].images[0]))} 
                                                 alt={o.products[0].name} 
                                                 style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '8px', border: '1px solid #edf2f7' }}
                                             />
