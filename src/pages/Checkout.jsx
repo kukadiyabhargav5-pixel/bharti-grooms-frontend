@@ -69,7 +69,7 @@ const Checkout = () => {
 
       // 2. Configure Razorpay
       const options = {
-        key: 'rzp_test_SLcsBD1iGzuxTA', // Key provided by user
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID, // Key from environment variables
         amount: orderData.amount,
         currency: orderData.currency,
         name: "BHARTI GLOOMS",
