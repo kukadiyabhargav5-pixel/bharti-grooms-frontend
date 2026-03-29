@@ -253,9 +253,15 @@ const AdminOrders = () => {
                                     {o.products && o.products.length > 0 && (
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '15px' }}>
                                             <img 
-                                                src={getImageUrl(o.products[0].photo || o.products[0].image || (o.products[0].images && o.products[0].images[0]))} 
+                                                src={(() => {
+                                                    const p = o.products[0];
+                                                    const rawPhoto = p.photo || p.image || (p.images && p.images[0]) || '';
+                                                    if (typeof rawPhoto === 'string' && rawPhoto.length < 5) return '/placeholder.jpg';
+                                                    return getImageUrl(rawPhoto);
+                                                })()} 
                                                 alt={o.products[0].name} 
                                                 style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '8px', border: '1px solid #edf2f7' }}
+                                                onError={(e) => { e.target.src = '/placeholder.jpg'; }}
                                             />
                                             <div>
                                                 <div style={{ fontWeight: '600', color: '#1e293b', fontSize: '0.95rem' }}>{o.products[0].name}</div>
