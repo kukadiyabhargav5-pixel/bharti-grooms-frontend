@@ -31,7 +31,7 @@ const Product = () => {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${API_BASE_URL}/api/admin/products`);
+      const res = await axios.get(`${API_BASE_URL}/api/products`);
       setProducts(res.data);
     } catch (error) {
       console.error('Failed to fetch products:', error);

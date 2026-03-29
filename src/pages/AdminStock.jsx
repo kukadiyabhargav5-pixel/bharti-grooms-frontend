@@ -42,7 +42,8 @@ const AdminStock = () => {
     const fetchProducts = async () => {
         setLoading(true);
         try {
-            const res = await axios.get(`${API_BASE_URL}/api/admin/products`);            let filtered = res.data;
+            const res = await axios.get(`${API_BASE_URL}/api/products`);
+            let filtered = res.data;
 
             if (status === 'in-stock') {
                 filtered = filtered.filter(p => p.stock >= 5);

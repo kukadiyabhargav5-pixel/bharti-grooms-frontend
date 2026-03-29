@@ -54,7 +54,7 @@ const Home = () => {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get(`${API_BASE_URL}/api/admin/products`);
+      const res = await axios.get(`${API_BASE_URL}/api/products`);
       setProducts(res.data.slice(0, 10));
     } catch (error) {
       console.error('Failed to fetch slider products:', error);
