@@ -15,9 +15,18 @@ const AdminOrders = () => {
 
     const fetchOrders = async () => {
         setLoading(true);
+        // Map URL status to Backend Status
+        const statusMap = {
+            'pending': 'Pending',
+            'ready-to-ship': 'Ready to Ship',
+            'out-for-delivery': 'Out for Delivery',
+            'delivered': 'Delivered'
+        };
+        const backendStatus = statusMap[status] || status;
+
         try {
             const res = await axios.get(`${API_BASE_URL}/api/admin/orders`, {
-                params: { status }
+                params: { status: backendStatus }
             });
             setOrders(res.data);
         } catch (error) {
