@@ -3,45 +3,7 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import { FiHome, FiPackage, FiArrowLeft, FiSearch, FiEye, FiClock, FiBox, FiTruck, FiCheck, FiShoppingBag, FiTrash2, FiDownload } from 'react-icons/fi';
 import axios from 'axios';
 import html2pdf from 'html2pdf.js';
-<<<<<<< HEAD
-import { API_BASE_URL } from '../apiConfig';
-=======
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
-import '../styles/Admin.css';
-
-const AdminOrders = () => {
-    const { status } = useParams();
-    const navigate = useNavigate();
-    const [orders, setOrders] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [searchTerm, setSearchTerm] = useState('');
-
-    useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (!user || user.role !== 'admin') {
-            navigate('/login');
-        }
-        window.scrollTo(0, 0);
-        fetchOrders();
-    }, [navigate, status]);
-
-    const fetchOrders = async () => {
-        setLoading(true);
-        try {
-            // Map URL status to exact backend status string (case-sensitive)
-            let backendStatus = '';
-            if (status === 'pending') backendStatus = 'Pending';
-            else if (status === 'ready-to-ship') backendStatus = 'Ready to Ship';
-            else if (status === 'out-for-delivery') backendStatus = 'Out for Delivery';
-            else if (status === 'delivered') backendStatus = 'Delivered';
-
-            console.log(`Fetching orders for status: ${status} -> ${backendStatus}`);
-<<<<<<< HEAD
-            const res = await axios.get(`${API_BASE_URL}/api/admin/orders?status=${backendStatus}`);
-=======
-            const res = await axios.get(`http://localhost:5000/api/admin/orders?status=${backendStatus}`);
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
-            setOrders(res.data);
+import { API_BASE_URL } from '../apiConfig';            setOrders(res.data);
         } catch (error) {
             console.error('Failed to fetch orders:', error);
         } finally {
@@ -51,12 +13,7 @@ const AdminOrders = () => {
 
     const handleStatusUpdate = async (orderId, nextStatus) => {
         try {
-<<<<<<< HEAD
-            await axios.put(`${API_BASE_URL}/api/admin/orders/${orderId}/status`, { status: nextStatus });
-=======
-            await axios.put(`http://localhost:5000/api/admin/orders/${orderId}/status`, { status: nextStatus });
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
-            fetchOrders(); // Refresh list
+            await axios.put(`${API_BASE_URL}/api/admin/orders/${orderId}/status`, { status: nextStatus });            fetchOrders(); // Refresh list
         } catch (error) {
             console.error('Failed to update order status:', error);
             alert('Failed to update order status');

@@ -4,10 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 import Footer from '../components/Footer';
-<<<<<<< HEAD
 import { getImageUrl } from '../apiConfig';
-=======
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
 import '../styles/Cart.css';
 
 const Cart = () => {
@@ -72,11 +69,7 @@ const Cart = () => {
                   >
                     <div className="cart-item-image">
                       <img 
-<<<<<<< HEAD
                         src={getImageUrl(item.images && item.images.length > 0 ? item.images[0] : '')} 
-=======
-                        src={item.images && item.images.length > 0 ? `http://localhost:5000${item.images[0]}` : ''} 
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
                         alt={item.name} 
                       />
                     </div>

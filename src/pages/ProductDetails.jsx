@@ -6,10 +6,7 @@ import axios from 'axios';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import Footer from '../components/Footer';
-<<<<<<< HEAD
 import { API_BASE_URL, getImageUrl } from '../apiConfig';
-=======
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
 import '../styles/ProductDetails.css';
 
 const ProductDetails = () => {
@@ -29,11 +26,7 @@ const ProductDetails = () => {
 
   const fetchProduct = async () => {
     try {
-<<<<<<< HEAD
       const res = await axios.get(`${API_BASE_URL}/api/admin/products/${id}`);
-=======
-      const res = await axios.get(`http://localhost:5000/api/admin/products/${id}`);
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
       setProduct(res.data);
     } catch (error) {
       console.error('Failed to fetch product details:', error);
@@ -118,11 +111,7 @@ const ProductDetails = () => {
                   className="motion-image-container"
                 >
                   <motion.img 
-<<<<<<< HEAD
                     src={getImageUrl(product.images[activeImage])} 
-=======
-                    src={`http://localhost:5000${product.images[activeImage]}`} 
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
                     alt={product.name} 
                     className="main-image"
                     whileHover={{ scale: 1.05 }}

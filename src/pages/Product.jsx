@@ -5,10 +5,7 @@ import axios from 'axios';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import Footer from '../components/Footer';
-<<<<<<< HEAD
 import { API_BASE_URL, getImageUrl } from '../apiConfig';
-=======
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
 import '../styles/Product.css';
 
 const Product = () => {
@@ -34,11 +31,7 @@ const Product = () => {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-<<<<<<< HEAD
       const res = await axios.get(`${API_BASE_URL}/api/admin/products`);
-=======
-      const res = await axios.get('http://localhost:5000/api/admin/products');
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
       setProducts(res.data);
     } catch (error) {
       console.error('Failed to fetch products:', error);
@@ -141,11 +134,7 @@ const Product = () => {
                   >
                     <div className="product-img-wrapper">
                       {product.images && product.images.length > 0 ? (
-<<<<<<< HEAD
                         <img src={getImageUrl(product.images[0])} alt={product.name} className="product-image" />
-=======
-                        <img src={`http://localhost:5000${product.images[0]}`} alt={product.name} className="product-image" />
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
                       ) : (
                         <div className="no-image-placeholder">No Image</div>
                       )}

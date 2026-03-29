@@ -4,10 +4,7 @@ import { FiCheckCircle, FiPrinter, FiDownload, FiHome } from 'react-icons/fi';
 import { useCart } from '../context/CartContext';
 import axios from 'axios';
 import html2pdf from 'html2pdf.js';
-<<<<<<< HEAD
 import { API_BASE_URL, getImageUrl } from '../apiConfig';
-=======
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
 import '../styles/Invoice.css';
 
 const Invoice = () => {
@@ -26,11 +23,7 @@ const Invoice = () => {
     if (id && !data) {
       const fetchOrder = async () => {
         try {
-<<<<<<< HEAD
           const res = await axios.get(`${API_BASE_URL}/api/admin/orders/view/${id}`);
-=======
-          const res = await axios.get(`http://localhost:5000/api/admin/orders/view/${id}`);
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
           const order = res.data;
           // Map backend order format to Invoice format
           setData({
@@ -188,11 +181,7 @@ const Invoice = () => {
                 <tr key={idx} className="table-row-final">
                   <td className="td-img-centered">
                     <img 
-<<<<<<< HEAD
                       src={getImageUrl(item.image || (item.images?.[0]) || '/placeholder.jpg')} 
-=======
-                      src={`http://localhost:5000${item.image || (item.images?.[0]) || '/placeholder.jpg'}`} 
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
                       alt={item.name} 
                       className="item-thumb-proper"
                     />

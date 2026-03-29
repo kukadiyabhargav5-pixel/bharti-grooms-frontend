@@ -2,10 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FiMail, FiLock, FiArrowLeft, FiCheck, FiEye, FiEyeOff } from 'react-icons/fi';
 import axios from 'axios';
-<<<<<<< HEAD
 import { API_BASE_URL } from '../apiConfig';
-=======
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
 
 const STEPS = { EMAIL: 1, OTP: 2, PASSWORD: 3, SUCCESS: 4 };
 
@@ -29,11 +26,7 @@ const ForgotPassword = () => {
     if (!email.trim()) { setError('Please enter your email'); return; }
     setLoading(true);
     try {
-<<<<<<< HEAD
       await axios.post(`${API_BASE_URL}/api/auth/forgot-password/send-otp`, { email });
-=======
-      await axios.post('http://localhost:5000/api/auth/forgot-password/send-otp', { email });
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
       setStep(STEPS.OTP);
       startResendTimer();
     } catch (err) {
@@ -74,11 +67,7 @@ const ForgotPassword = () => {
     setError('');
     setLoading(true);
     try {
-<<<<<<< HEAD
       await axios.post(`${API_BASE_URL}/api/auth/forgot-password/verify-otp`, { email, otp: otpString });
-=======
-      await axios.post('http://localhost:5000/api/auth/forgot-password/verify-otp', { email, otp: otpString });
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
       setStep(STEPS.PASSWORD);
     } catch (err) {
       setError(err.response?.data?.message || 'Invalid OTP');
@@ -95,11 +84,7 @@ const ForgotPassword = () => {
     if (newPassword !== confirmPassword) { setError('Passwords do not match'); return; }
     setLoading(true);
     try {
-<<<<<<< HEAD
       await axios.post(`${API_BASE_URL}/api/auth/forgot-password/reset`, {
-=======
-      await axios.post('http://localhost:5000/api/auth/forgot-password/reset', {
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
         email, otp: otp.join(''), newPassword
       });
       setStep(STEPS.SUCCESS);

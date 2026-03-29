@@ -5,10 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FiArrowRight, FiShoppingBag, FiStar, FiShield, FiTruck, FiAward } from 'react-icons/fi';
 import { GiDress, GiDiamondRing } from 'react-icons/gi';
 import Footer from '../components/Footer';
-<<<<<<< HEAD
 import { API_BASE_URL, getImageUrl } from '../apiConfig';
-=======
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
 import '../styles/Home.css';
 
 const features = [
@@ -57,11 +54,7 @@ const Home = () => {
 
   const fetchProducts = async () => {
     try {
-<<<<<<< HEAD
       const res = await axios.get(`${API_BASE_URL}/api/admin/products`);
-=======
-      const res = await axios.get('http://localhost:5000/api/admin/products');
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
       setProducts(res.data.slice(0, 10));
     } catch (error) {
       console.error('Failed to fetch slider products:', error);
@@ -151,11 +144,7 @@ const Home = () => {
                       className={`hero-slider-slide ${index === currentSlide ? 'active' : ''}`}
                     >
                       <img
-<<<<<<< HEAD
                         src={getImageUrl(product.images[0])}
-=======
-                        src={`http://localhost:5000${product.images[0]}`}
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
                         alt={product.name}
                         className="hero-product-img"
                       />

@@ -2,42 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FiHome, FiUsers, FiPackage, FiLogOut, FiMenu, FiX, FiSearch, FiEdit2, FiTrash2, FiEye } from 'react-icons/fi';
 import axios from 'axios';
-<<<<<<< HEAD
-import { API_BASE_URL } from '../apiConfig';
-=======
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
-import '../styles/Admin.css';
-
-const AdminUsers = () => {
-  const navigate = useNavigate();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
-  
-  // Modal States
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [modalMode, setModalMode] = useState(null); // 'view' or 'edit'
-  const [formData, setFormData] = useState({ name: '', email: '', mobileNumber: '', address: '' });
-
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (!user || user.role !== 'admin') {
-      navigate('/login');
-    }
-    window.scrollTo(0, 0);
-    fetchUsers();
-  }, [navigate]);
-
-  const fetchUsers = async () => {
-    setLoading(true);
-    try {
-<<<<<<< HEAD
-      const res = await axios.get(`${API_BASE_URL}/api/admin/users`);
-=======
-      const res = await axios.get('http://localhost:5000/api/admin/users');
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
-      setUsers(res.data);
+import { API_BASE_URL } from '../apiConfig';      setUsers(res.data);
     } catch (error) {
       console.error('Failed to fetch users:', error);
     } finally {
@@ -70,12 +35,7 @@ const AdminUsers = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-<<<<<<< HEAD
-      await axios.put(`${API_BASE_URL}/api/admin/users/${selectedUser._id}`, formData);
-=======
-      await axios.put(`http://localhost:5000/api/admin/users/${selectedUser._id}`, formData);
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
-      closeModal();
+      await axios.put(`${API_BASE_URL}/api/admin/users/${selectedUser._id}`, formData);      closeModal();
       fetchUsers();
     } catch (error) {
       alert('Failed to update user');
@@ -85,12 +45,7 @@ const AdminUsers = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this user? This action cannot be undone.')) {
       try {
-<<<<<<< HEAD
-        await axios.delete(`${API_BASE_URL}/api/admin/users/${id}`);
-=======
-        await axios.delete(`http://localhost:5000/api/admin/users/${id}`);
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
-        fetchUsers();
+        await axios.delete(`${API_BASE_URL}/api/admin/users/${id}`);        fetchUsers();
       } catch (error) {
         alert('Failed to delete user');
       }

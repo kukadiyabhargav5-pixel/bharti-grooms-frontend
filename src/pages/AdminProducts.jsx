@@ -2,42 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FiHome, FiUsers, FiPackage, FiLogOut, FiMenu, FiX, FiSearch, FiEdit2, FiTrash2, FiEye, FiPlus } from 'react-icons/fi';
 import axios from 'axios';
-<<<<<<< HEAD
-import { API_BASE_URL, getImageUrl } from '../apiConfig';
-=======
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
-import '../styles/Admin.css';
-
-const AdminProducts = () => {
-  const navigate = useNavigate();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
-  
-  // Modal States
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [modalMode, setModalMode] = useState(null);
-  const [formData, setFormData] = useState({ name: '', price: '', category: '' });
-
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (!user || user.role !== 'admin') {
-      navigate('/login');
-    }
-    window.scrollTo(0, 0);
-    fetchProducts();
-  }, [navigate]);
-
-  const fetchProducts = async () => {
-    setLoading(true);
-    try {
-<<<<<<< HEAD
-      const res = await axios.get(`${API_BASE_URL}/api/admin/products`);
-=======
-      const res = await axios.get('http://localhost:5000/api/admin/products');
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
-      setProducts(res.data);
+import { API_BASE_URL, getImageUrl } from '../apiConfig';      setProducts(res.data);
     } catch (error) {
       console.error('Failed to fetch products:', error);
     } finally {
@@ -69,12 +34,7 @@ const AdminProducts = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-<<<<<<< HEAD
-      await axios.put(`${API_BASE_URL}/api/admin/products/${selectedProduct._id}`, formData);
-=======
-      await axios.put(`http://localhost:5000/api/admin/products/${selectedProduct._id}`, formData);
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
-      closeModal();
+      await axios.put(`${API_BASE_URL}/api/admin/products/${selectedProduct._id}`, formData);      closeModal();
       fetchProducts();
     } catch (error) {
       alert('Failed to update product');
@@ -84,12 +44,7 @@ const AdminProducts = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       try {
-<<<<<<< HEAD
-        await axios.delete(`${API_BASE_URL}/api/admin/products/${id}`);
-=======
-        await axios.delete(`http://localhost:5000/api/admin/products/${id}`);
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
-        fetchProducts();
+        await axios.delete(`${API_BASE_URL}/api/admin/products/${id}`);        fetchProducts();
       } catch (error) {
         alert('Failed to delete product');
       }
@@ -165,12 +120,7 @@ const AdminProducts = () => {
                 <div key={p._id} className="admin-detail-card">
                    <div className="admin-card-img-wrapper">
                       {p.images && p.images.length > 0 ? (
-<<<<<<< HEAD
-                        <img src={getImageUrl(p.images[0])} alt={p.name} className="admin-card-img" />
-=======
-                        <img src={`http://localhost:5000${p.images[0]}`} alt={p.name} className="admin-card-img" />
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
-                      ) : (
+                        <img src={getImageUrl(p.images[0])} alt={p.name} className="admin-card-img" />                      ) : (
                         <div className="admin-card-no-img">No Image</div>
                       )}
                    </div>
@@ -204,12 +154,7 @@ const AdminProducts = () => {
               <div className="admin-modal-body">
                 {modalMode === 'view' && selectedProduct?.images?.length > 0 && (
                   <div className="admin-modal-img-wrapper">
-<<<<<<< HEAD
-                    <img src={getImageUrl(selectedProduct.images[0])} alt={selectedProduct.name} className="admin-modal-img" />
-=======
-                    <img src={`http://localhost:5000${selectedProduct.images[0]}`} alt={selectedProduct.name} className="admin-modal-img" />
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
-                  </div>
+                    <img src={getImageUrl(selectedProduct.images[0])} alt={selectedProduct.name} className="admin-modal-img" />                  </div>
                 )}
                 <div className="admin-form-group">
                   <label>Product Name</label>

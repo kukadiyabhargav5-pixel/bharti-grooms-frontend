@@ -7,10 +7,7 @@ import {
 } from 'react-icons/fi';
 import Footer from '../components/Footer';
 import axios from 'axios';
-<<<<<<< HEAD
 import { API_BASE_URL } from '../apiConfig';
-=======
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
 
 const statusIcon = (status) => {
   if (status === 'Pending') return <FiClock style={{ color: '#f39c12' }} />;
@@ -67,11 +64,7 @@ const Profile = () => {
     try {
       const userId = user.id || user._id;
       const email = user.email;
-<<<<<<< HEAD
       const res = await axios.get(`${API_BASE_URL}/api/auth/my-orders?userId=${userId}&email=${email}`);
-=======
-      const res = await axios.get(`http://localhost:5000/api/auth/my-orders?userId=${userId}&email=${email}`);
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
       setOrders(res.data);
     } catch (err) {
       console.error('Failed to fetch orders:', err);
@@ -100,11 +93,7 @@ const Profile = () => {
     setPasswordError('');
     try {
       const userId = user.id || user._id;
-<<<<<<< HEAD
       await axios.post(`${API_BASE_URL}/api/auth/verify-password`, { userId, password: passwordInput });
-=======
-      await axios.post('http://localhost:5000/api/auth/verify-password', { userId, password: passwordInput });
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
       // Password correct — open edit form
       setPasswordModal(false);
       setEditMode(true);
@@ -120,11 +109,7 @@ const Profile = () => {
     setSaveLoading(true);
     try {
       const userId = user.id || user._id;
-<<<<<<< HEAD
       const res = await axios.put(`${API_BASE_URL}/api/auth/update-profile`, {
-=======
-      const res = await axios.put('http://localhost:5000/api/auth/update-profile', {
->>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
         userId,
         name: editForm.name,
         mobileNumber: editForm.mobileNumber,
