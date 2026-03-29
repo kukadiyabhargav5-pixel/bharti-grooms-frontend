@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { FiHome, FiPackage, FiArrowLeft, FiSearch, FiEye, FiEdit2, FiTrash2, FiBox, FiAlertCircle, FiXCircle } from 'react-icons/fi';
 import axios from 'axios';
-import { API_BASE_URL } from '../apiConfig';
+import { API_BASE_URL, getImageUrl } from '../apiConfig';
 import '../styles/Admin.css';
 
 const AdminStock = () => {
@@ -13,12 +13,12 @@ const AdminStock = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [editingStock, setEditingStock] = useState({});
 
-    const handleUpdateStock = async (productId) => {
-        const newStock = editingStock[productId];
+    const handleStockUpdate = async (productId, newStock) => {
         if (newStock === undefined) return;
         try {
             await axios.put(`${API_BASE_URL}/api/admin/products/${productId}/stock`, { stock: newStock });
             fetchProducts(); // Refresh list, product might move to another page
+
 
         } catch (error) {
             console.error('Failed to update stock:', error);
@@ -139,7 +139,7 @@ const AdminStock = () => {
                                 <div key={p._id} className="admin-detail-card">
                                     <div className="admin-card-img-wrapper">
                                         {p.images && p.images.length > 0 ? (
-                                            <img src={`http://localhost:5000${p.images[0]}`} alt={p.name} className="admin-card-img" />
+                                            <img src={getImageUrl(p.images[0])} alt={p.name} className="admin-card-img" />
                                         ) : (
                                             <div className="admin-card-no-img">No Image</div>
                                         )}
