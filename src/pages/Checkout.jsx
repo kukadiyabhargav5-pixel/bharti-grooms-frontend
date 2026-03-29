@@ -5,7 +5,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FiUser, FiMail, FiPhone, FiMapPin, FiArrowLeft, FiLock, FiCheckCircle } from 'react-icons/fi';
 import { useCart } from '../context/CartContext';
 import Footer from '../components/Footer';
+<<<<<<< HEAD
 import { API_BASE_URL, getImageUrl } from '../apiConfig';
+=======
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
 import '../styles/Checkout.css';
 
 const Checkout = () => {
@@ -47,7 +50,11 @@ const Checkout = () => {
 
     try {
       // 1. Create order on backend
+<<<<<<< HEAD
       const response = await fetch(`${API_BASE_URL}/api/payment/order`, {
+=======
+      const response = await fetch('http://localhost:5000/api/payment/order', {
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -86,7 +93,11 @@ const Checkout = () => {
             totalAmount: cartTotal
           };
 
+<<<<<<< HEAD
           const verifyRes = await fetch(`${API_BASE_URL}/api/payment/verify`, {
+=======
+          const verifyRes = await fetch('http://localhost:5000/api/payment/verify', {
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -273,7 +284,11 @@ const Checkout = () => {
                       className="summary-item-premium"
                     >
                       <div className="summary-item-img-box">
+<<<<<<< HEAD
                         <img src={getImageUrl(item.images[0])} alt={item.name} />
+=======
+                        <img src={`http://localhost:5000${item.images[0]}`} alt={item.name} />
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
                         <span className="qty-badge">{item.quantity}</span>
                       </div>
                       <div className="summary-item-info">

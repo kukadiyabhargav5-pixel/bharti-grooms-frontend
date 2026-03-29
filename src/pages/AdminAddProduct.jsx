@@ -2,7 +2,10 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FiHome, FiPackage, FiUpload, FiX, FiCheck, FiArrowLeft } from 'react-icons/fi';
 import axios from 'axios';
+<<<<<<< HEAD
 import { API_BASE_URL } from '../apiConfig';
+=======
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
 import '../styles/Admin.css';
 
 const AdminAddProduct = () => {
@@ -133,7 +136,11 @@ const AdminAddProduct = () => {
     images.forEach(img => data.append('images', img));
 
     try {
+<<<<<<< HEAD
       await axios.post(`${API_BASE_URL}/api/admin/products`, data, {
+=======
+      await axios.post('http://localhost:5000/api/admin/products', data, {
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       alert('Product added successfully!');

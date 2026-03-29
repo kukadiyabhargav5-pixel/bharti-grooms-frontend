@@ -4,7 +4,10 @@ import { FiHeart, FiSearch, FiShoppingBag, FiTrash2, FiChevronRight, FiShoppingC
 import { useWishlist } from '../context/WishlistContext';
 import { useCart } from '../context/CartContext';
 import Footer from '../components/Footer';
+<<<<<<< HEAD
 import { API_BASE_URL, getImageUrl } from '../apiConfig';
+=======
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
 import '../styles/Wishlist.css';
 
 const Wishlist = () => {
@@ -91,7 +94,11 @@ const Wishlist = () => {
                       style={{ transitionDelay: `${index * 0.1}s` }}
                     >
                       <div className="card-image-box">
+<<<<<<< HEAD
                         <img src={getImageUrl(item.images[0])} alt={item.name} />
+=======
+                        <img src={`http://localhost:5000${item.images[0]}`} alt={item.name} />
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
                         <div className="card-overlay">
                           <button 
                             className="remove-btn" 

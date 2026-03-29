@@ -7,7 +7,10 @@ import {
   FiSend, FiChevronRight, FiCalendar, FiUser, FiInfo
 } from 'react-icons/fi';
 import axios from 'axios';
+<<<<<<< HEAD
 import { API_BASE_URL } from '../apiConfig';
+=======
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
 import '../styles/Admin.css';
 
 const AdminComplaints = () => {
@@ -27,7 +30,11 @@ const AdminComplaints = () => {
   const fetchComplaints = async () => {
     try {
       setLoading(true);
+<<<<<<< HEAD
       const res = await axios.get(`${API_BASE_URL}/api/complaints`);
+=======
+      const res = await axios.get('http://127.0.0.1:5000/api/complaints');
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
       setComplaints(res.data);
     } catch (error) {
       console.error('Failed to fetch complaints:', error);
@@ -54,7 +61,11 @@ const AdminComplaints = () => {
 
   const updateStatus = async (id, status) => {
     try {
+<<<<<<< HEAD
       await axios.put(`${API_BASE_URL}/api/complaints/${id}/status`, { status });
+=======
+      await axios.put(`http://127.0.0.1:5000/api/complaints/${id}/status`, { status });
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
       // Update local state for immediate feedback
       setComplaints(prev => prev.map(c => c._id === id ? { ...c, status } : c));
     } catch (error) {
@@ -65,7 +76,11 @@ const AdminComplaints = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to permanently delete this inquiry? This action cannot be undone.')) {
       try {
+<<<<<<< HEAD
         await axios.delete(`${API_BASE_URL}/api/complaints/${id}`);
+=======
+        await axios.delete(`http://127.0.0.1:5000/api/complaints/${id}`);
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
         setComplaints(prev => prev.filter(c => c._id !== id));
         if (selectedInquiry?._id === id) handleCloseModal();
       } catch (error) {
@@ -79,7 +94,11 @@ const AdminComplaints = () => {
     
     setIsSending(true);
     try {
+<<<<<<< HEAD
       await axios.post(`${API_BASE_URL}/api/complaints/${selectedInquiry._id}/reply`, {
+=======
+      await axios.post(`http://127.0.0.1:5000/api/complaints/${selectedInquiry._id}/reply`, {
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
         replyMessage: replyText
       });
       alert('Reply sent successfully! The inquiry has been removed from your inbox.');

@@ -3,7 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiShield, FiCopy, FiCheckCircle, FiArrowLeft } from 'react-icons/fi';
 import axios from 'axios';
+<<<<<<< HEAD
 import { API_BASE_URL } from '../apiConfig';
+=======
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
 import '../styles/Admin.css';
 
 const Admin2FASetup = () => {
@@ -21,7 +24,11 @@ const Admin2FASetup = () => {
 
     const fetchSetup = async () => {
       try {
+<<<<<<< HEAD
         const res = await axios.get(`${API_BASE_URL}/api/auth/admin/setup-2fa`);
+=======
+        const res = await axios.get('http://localhost:5000/api/auth/admin/setup-2fa');
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
         setSetupData(res.data);
       } catch (err) {
         console.error('Failed to fetch 2FA setup:', err);

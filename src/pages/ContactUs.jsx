@@ -3,7 +3,10 @@ import { motion } from 'framer-motion';
 import { FiMail, FiPhone, FiMapPin, FiSend, FiClock } from 'react-icons/fi';
 import axios from 'axios';
 import Footer from '../components/Footer';
+<<<<<<< HEAD
 import { API_BASE_URL } from '../apiConfig';
+=======
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
 import '../styles/Legal.css';
 
 const ContactUs = () => {
@@ -27,8 +30,13 @@ const ContactUs = () => {
     setError(null);
     
     try {
+<<<<<<< HEAD
       // Use dynamic API_BASE_URL for live deployment
       const response = await axios.post(`${API_BASE_URL}/api/complaints`, formData);
+=======
+      // Reverting to localhost for consistency with other components like Login.jsx
+      const response = await axios.post('http://localhost:5000/api/complaints', formData);
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
       
       console.log('✅ Submission successful:', response.data);
       setSubmitted(true);

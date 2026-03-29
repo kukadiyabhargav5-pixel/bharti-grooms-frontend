@@ -6,7 +6,10 @@ import { useRef } from 'react';
 import axios from 'axios';
 import { useGoogleLogin } from '@react-oauth/google';
 import Footer from '../components/Footer';
+<<<<<<< HEAD
 import { API_BASE_URL } from '../apiConfig';
+=======
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
 import '../styles/Auth.css';
 
 const Login = () => {
@@ -39,7 +42,11 @@ const Login = () => {
     setError('');
 
     try {
+<<<<<<< HEAD
       const res = await axios.post(`${API_BASE_URL}/api/auth/login`, formData);
+=======
+      const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
       
       if (res.data.requires2FA) {
         setShow2FA(true);
@@ -79,7 +86,11 @@ const Login = () => {
     setError('');
 
     try {
+<<<<<<< HEAD
       const res = await axios.post(`${API_BASE_URL}/api/auth/admin/verify-2fa`, {
+=======
+      const res = await axios.post('http://localhost:5000/api/auth/admin/verify-2fa', {
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
         email: formData.email,
         code: code
       });
@@ -137,7 +148,11 @@ const Login = () => {
         // Since we are using custom button, we get an access token
         // We might need to fetch user info from google or send the code to backend
         // For simplicity, let's assume our backend handles the token
+<<<<<<< HEAD
         const res = await axios.post(`${API_BASE_URL}/api/auth/google-login`, {
+=======
+        const res = await axios.post('http://localhost:5000/api/auth/google-login', {
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
           access_token: tokenResponse.access_token
         });
         localStorage.setItem('token', res.data.token);

@@ -5,7 +5,10 @@ import { FiUser, FiMail, FiPhone, FiLock, FiEye, FiEyeOff, FiMapPin } from 'reac
 import axios from 'axios';
 import { useGoogleLogin } from '@react-oauth/google';
 import Footer from '../components/Footer';
+<<<<<<< HEAD
 import { API_BASE_URL } from '../apiConfig';
+=======
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
 import '../styles/Auth.css';
 
 const Register = () => {
@@ -38,7 +41,11 @@ const Register = () => {
     setError('');
 
     try {
+<<<<<<< HEAD
       const res = await axios.post(`${API_BASE_URL}/api/auth/register`, formData);
+=======
+      const res = await axios.post('http://localhost:5000/api/auth/register', formData);
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
       navigate('/');
@@ -54,7 +61,11 @@ const Register = () => {
       setLoading(true);
       setError('');
       try {
+<<<<<<< HEAD
         const res = await axios.post(`${API_BASE_URL}/api/auth/google-login`, {
+=======
+        const res = await axios.post('http://localhost:5000/api/auth/google-login', {
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
           access_token: tokenResponse.access_token
         });
         localStorage.setItem('token', res.data.token);

@@ -2,7 +2,10 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FiHome, FiUsers, FiPackage, FiLogOut, FiMenu, FiX, FiTrendingUp, FiDollarSign, FiPlusCircle, FiClock, FiBox, FiTruck, FiCheck, FiEye, FiFileText, FiTrash2, FiCalendar, FiFilter, FiShield, FiMail } from 'react-icons/fi';
 import axios from 'axios';
+<<<<<<< HEAD
 import { API_BASE_URL } from '../apiConfig';
+=======
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
 import '../styles/Admin.css';
 
 const AdminDashboard = () => {
@@ -33,10 +36,17 @@ const AdminDashboard = () => {
         params.startDate = customRange.start;
         params.endDate = customRange.end;
       }
+<<<<<<< HEAD
       const res = await axios.get(`${API_BASE_URL}/api/admin/stats`, { params });
       
       // Also fetch complaints
       const complaintsRes = await axios.get(`${API_BASE_URL}/api/complaints`);
+=======
+      const res = await axios.get('http://localhost:5000/api/admin/stats', { params });
+      
+      // Also fetch complaints
+      const complaintsRes = await axios.get('http://localhost:5000/api/complaints');
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
       
       setStats({
         ...res.data,
@@ -51,7 +61,11 @@ const AdminDashboard = () => {
   const deleteOrder = async (id) => {
     if (window.confirm('Delete this order permanently?')) {
       try {
+<<<<<<< HEAD
         await axios.delete(`${API_BASE_URL}/api/admin/orders/${id}`);
+=======
+        await axios.delete(`http://localhost:5000/api/admin/orders/${id}`);
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
         fetchStats();
       } catch (err) {
         alert('Delete failed');

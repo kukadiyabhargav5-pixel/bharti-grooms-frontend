@@ -2,7 +2,10 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { FiArrowLeft, FiUser, FiPackage, FiMapPin, FiPhone, FiMail, FiCreditCard, FiClock, FiBox, FiTruck, FiCheck, FiPrinter } from 'react-icons/fi';
 import axios from 'axios';
+<<<<<<< HEAD
 import { API_BASE_URL } from '../apiConfig';
+=======
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
 import '../styles/Admin.css';
 
 const AdminOrderDetails = () => {
@@ -22,7 +25,11 @@ const AdminOrderDetails = () => {
     const fetchOrderDetails = async () => {
         setLoading(true);
         try {
+<<<<<<< HEAD
             const res = await axios.get(`${API_BASE_URL}/api/admin/orders/view/${id}`);
+=======
+            const res = await axios.get(`http://localhost:5000/api/admin/orders/view/${id}`);
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
             setOrder(res.data);
         } catch (error) {
             console.error('Failed to fetch order details:', error);
@@ -33,7 +40,11 @@ const AdminOrderDetails = () => {
 
     const handleStatusUpdate = async (nextStatus) => {
         try {
+<<<<<<< HEAD
             await axios.put(`${API_BASE_URL}/api/admin/orders/${id}/status`, { status: nextStatus });
+=======
+            await axios.put(`http://localhost:5000/api/admin/orders/${id}/status`, { status: nextStatus });
+>>>>>>> e7c4edf6ed26cb8550d0ff7fb77bcd93d25367bc
             fetchOrderDetails();
         } catch (error) {
             console.error('Failed to update status:', error);
