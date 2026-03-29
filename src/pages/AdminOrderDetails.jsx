@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { FiArrowLeft, FiUser, FiPackage, FiMapPin, FiPhone, FiMail, FiCreditCard, FiClock, FiBox, FiTruck, FiCheck, FiPrinter } from 'react-icons/fi';
 import axios from 'axios';
-import { API_BASE_URL } from '../apiConfig';
+import { API_BASE_URL, getImageUrl } from '../apiConfig';
 import '../styles/Admin.css';
 
 const AdminOrderDetails = () => {
@@ -126,7 +126,15 @@ const AdminOrderDetails = () => {
                                 {order.products?.map((item, idx) => (
                                     <div key={idx} className="order-item-row">
                                         <div className="item-img-container no-print">
-                                            {item.photo && <img src={item.photo} alt={item.name} />}
+                                            <img 
+                                                src={(() => {
+                                                    const rawPhoto = item.photo || item.image || (item.images && item.images[0]) || '';
+                                                    if (typeof rawPhoto === 'string' && rawPhoto.length < 5) return 'https://placehold.co/100x100?text=No+Image';
+                                                    return getImageUrl(rawPhoto);
+                                                })()} 
+                                                alt={item.name} 
+                                                onError={(e) => { e.target.src = 'https://placehold.co/100x100?text=No+Image'; }}
+                                            />
                                         </div>
                                         <div className="item-info">
                                             <h4>{item.name}</h4>
