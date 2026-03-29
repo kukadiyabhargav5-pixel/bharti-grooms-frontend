@@ -12,6 +12,7 @@ const AdminOrders = () => {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
+    const [processingId, setProcessingId] = useState(null);
 
     const fetchOrders = async () => {
         setLoading(true);
@@ -40,11 +41,15 @@ const AdminOrders = () => {
 
 
     const handleStatusUpdate = async (orderId, nextStatus) => {
+        setProcessingId(orderId);
         try {
-            await axios.put(`${API_BASE_URL}/api/admin/orders/${orderId}/status`, { status: nextStatus });            fetchOrders(); // Refresh list
+            await axios.put(`${API_BASE_URL}/api/admin/orders/${orderId}/status`, { status: nextStatus });
+            fetchOrders(); // Refresh list
         } catch (error) {
             console.error('Failed to update order status:', error);
             alert('Failed to update order status');
+        } finally {
+            setProcessingId(null);
         }
     };
 
@@ -152,11 +157,14 @@ const AdminOrders = () => {
 
     const handleDeleteOrder = async (id) => {
         if (window.confirm('Are you sure you want to cancel and delete this order?')) {
+            setProcessingId(id);
             try {
                 await axios.delete(`${API_BASE_URL}/api/admin/orders/${id}`);
                 fetchOrders();
             } catch (error) {
                 alert('Failed to delete order');
+            } finally {
+                setProcessingId(null);
             }
         }
     };
@@ -256,12 +264,12 @@ const AdminOrders = () => {
                                                 src={(() => {
                                                     const p = o.products[0];
                                                     const rawPhoto = p.photo || p.image || (p.images && p.images[0]) || '';
-                                                    if (typeof rawPhoto === 'string' && rawPhoto.length < 5) return '/placeholder.jpg';
+                                                    if (typeof rawPhoto === 'string' && rawPhoto.length < 5) return 'https://placehold.co/100x100?text=No+Image';
                                                     return getImageUrl(rawPhoto);
                                                 })()} 
                                                 alt={o.products[0].name} 
                                                 style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '8px', border: '1px solid #edf2f7' }}
-                                                onError={(e) => { e.target.src = '/placeholder.jpg'; }}
+                                                onError={(e) => { e.target.src = 'https://placehold.co/100x100?text=No+Image'; }}
                                             />
                                             <div>
                                                 <div style={{ fontWeight: '600', color: '#1e293b', fontSize: '0.95rem' }}>{o.products[0].name}</div>
@@ -298,15 +306,17 @@ const AdminOrders = () => {
                                                 background: o.status === 'Pending' ? '#2563eb' : '#64748b',
                                                 color: 'white',
                                                 fontWeight: '800',
-                                                cursor: 'pointer',
+                                                cursor: processingId === o._id ? 'not-allowed' : 'pointer',
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'center',
                                                 gap: '8px',
-                                                transition: 'all 0.2s'
+                                                transition: 'all 0.2s',
+                                                opacity: processingId === o._id ? 0.7 : 1
                                             }}
+                                            disabled={processingId === o._id}
                                         >
-                                            <FiDownload /> {o.status === 'Pending' ? 'Download & Ready to Ship' : 'Download Invoice'}
+                                            <FiDownload /> {processingId === o._id ? 'Processing...' : (o.status === 'Pending' ? 'Download & Ready to Ship' : 'Download Invoice')}
                                         </button>
 
                                         {getNextStatus() && (
@@ -320,11 +330,13 @@ const AdminOrders = () => {
                                                     background: 'var(--maroon)',
                                                     color: 'white',
                                                     fontWeight: '700',
-                                                    cursor: 'pointer',
-                                                    transition: 'all 0.2s'
+                                                    cursor: processingId === o._id ? 'not-allowed' : 'pointer',
+                                                    transition: 'all 0.2s',
+                                                    opacity: processingId === o._id ? 0.7 : 1
                                                 }}
+                                                disabled={processingId === o._id}
                                             >
-                                                Mark as {getNextStatus()}
+                                                {processingId === o._id ? 'Processing...' : `Mark as ${getNextStatus()}`}
                                             </button>
                                         )}
                                         <button 
