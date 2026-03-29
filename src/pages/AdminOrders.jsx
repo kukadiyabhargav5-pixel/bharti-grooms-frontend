@@ -34,7 +34,9 @@ const AdminOrders = () => {
         } finally {
             setLoading(false);
         }
-    };
+    };    useEffect(() => {
+        fetchOrders();
+    }, [status]);
 
 
     const handleStatusUpdate = async (orderId, nextStatus) => {

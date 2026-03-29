@@ -108,8 +108,8 @@ const Invoice = () => {
     return result;
   };
 
-  const cleanInvoiceId = generateRandomID(5);
-  const cleanTxnId = generateRandomID(15);
+  const cleanInvoiceId = orderData?.id?.slice(-6).toUpperCase() || 'N/A';
+  const cleanTxnId = paymentId || 'PENDING';
 
   return (
     <div className="invoice-page-wrapper">
@@ -133,8 +133,12 @@ const Invoice = () => {
                 <span className="meta-value">{currentDate}</span>
               </div>
               <div className="meta-row">
-                <span className="meta-label">INVOICE NO:</span>
-                <span className="meta-value">{cleanInvoiceId}</span>
+                <span className="meta-label">ID:</span>
+                <span className="meta-value">#{cleanInvoiceId}</span>
+              </div>
+              <div className="meta-row">
+                <span className="meta-label">METHOD:</span>
+                <span className="meta-value" style={{ fontWeight: '900', color: 'var(--maroon)' }}>{data.paymentMethod || 'ONLINE'}</span>
               </div>
               <div className="meta-row">
                 <span className="meta-label">TXN ID:</span>

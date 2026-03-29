@@ -17,6 +17,7 @@ const Checkout = () => {
     mobileNumber: '',
     address: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -42,8 +43,10 @@ const Checkout = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
     try {
       // 1. Create order on backend
@@ -77,7 +80,7 @@ const Checkout = () => {
           const storedUser = JSON.parse(localStorage.getItem('user'));
           
           const orderDetails = {
-            userId: storedUser?._id,
+            userId: storedUser?.id || storedUser?._id,
             name: formData.name,
             email: formData.email,
             mobileNumber: formData.mobileNumber,
@@ -133,9 +136,8 @@ const Checkout = () => {
       });
       rzp1.open();
 
-    } catch (error) {
-      console.error('Payment Flow Error:', error);
-      alert('An error occurred while processing your payment.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -234,6 +236,7 @@ const Checkout = () => {
                 </motion.div>
 
 
+
                 <motion.div variants={itemVariants} className="payment-notice-premium">
                   <FiLock /> Your information is encrypted and processed securely.
                 </motion.div>
@@ -244,8 +247,9 @@ const Checkout = () => {
                   whileTap={{ scale: 0.98 }}
                   type="submit" 
                   className="btn-place-order-premium"
+                  disabled={isSubmitting}
                 >
-                  Proceed to Payment <FiCheckCircle style={{ marginLeft: '10px' }} />
+                  {isSubmitting ? 'Processing...' : 'Proceed to Payment'} <FiCheckCircle style={{ marginLeft: '10px' }} />
                 </motion.button>
               </form>
             </motion.div>
