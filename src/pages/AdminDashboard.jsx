@@ -2,7 +2,39 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FiHome, FiUsers, FiPackage, FiLogOut, FiMenu, FiX, FiTrendingUp, FiDollarSign, FiPlusCircle, FiClock, FiBox, FiTruck, FiCheck, FiEye, FiFileText, FiTrash2, FiCalendar, FiFilter, FiShield, FiMail } from 'react-icons/fi';
 import axios from 'axios';
-import { API_BASE_URL } from '../apiConfig';      
+import { API_BASE_URL } from '../apiConfig';
+import '../styles/Admin.css';
+
+const AdminDashboard = () => {
+  const navigate = useNavigate();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [stats, setStats] = useState({
+    totalUsers: 0,
+    totalProducts: 0,
+    filteredUsers: 0,
+    filteredProducts: 0,
+    filteredRevenue: 0,
+    filteredOrdersCount: 0,
+    recentOrders: [],
+    orderStats: {
+      pendingCount: 0,
+      readyToShipCount: 0,
+      outForDeliveryCount: 0,
+      deliveredCount: 0
+    }
+  });
+  const [filterType, setFilterType] = useState('7days');
+  const [customRange, setCustomRange] = useState({
+    start: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    end: new Date().toISOString().split('T')[0]
+  });
+
+  const fetchStats = async () => {
+    try {
+      const res = await axios.get(`${API_BASE_URL}/api/admin/stats`, {
+        params: { filterType, ...customRange }
+      });
+      const complaintsRes = await axios.get(`${API_BASE_URL}/api/complaints`);
       setStats({
         ...res.data,
         complaints: complaintsRes.data,
@@ -12,6 +44,7 @@ import { API_BASE_URL } from '../apiConfig';
       console.error('Failed to fetch stats/complaints:', error);
     }
   };
+
 
   const deleteOrder = async (id) => {
     if (window.confirm('Delete this order permanently?')) {

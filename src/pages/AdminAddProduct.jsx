@@ -2,8 +2,118 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FiHome, FiPackage, FiUpload, FiX, FiCheck, FiArrowLeft } from 'react-icons/fi';
 import axios from 'axios';
-import { API_BASE_URL } from '../apiConfig';        headers: { 'Content-Type': 'multipart/form-data' }
+import { API_BASE_URL } from '../apiConfig';
+import '../styles/Admin.css';
+
+const AdminAddProduct = () => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [category, setCategory] = useState('');
+  const [images, setImages] = useState([]);
+  const [previews, setPreviews] = useState([]);
+  const [formData, setFormData] = useState({
+    name: '',
+    price: '',
+    stock: '',
+    specifications: {}
+  });
+
+  const categories = ['Saree', 'Kurtas & Suits', 'Lehenga Choli', 'Gowns', 'Anarkali'];
+
+  const categoryFields = {
+    'Saree': [
+      { name: 'fabric', label: 'Fabric', type: 'text', placeholder: 'e.g. Silk' },
+      { name: 'length', label: 'Length', type: 'numberWithUnit', options: ['Meters'], unitName: 'lengthUnit' },
+      { name: 'work', label: 'Work Type', type: 'text', placeholder: 'e.g. Embroidery' },
+      { name: 'blouse', label: 'Blouse Piece', type: 'select', options: ['Yes', 'No'] }
+    ],
+    'Kurtas & Suits': [
+      { name: 'fabric', label: 'Fabric', type: 'text' },
+      { name: 'style', label: 'Style', type: 'text' },
+      { name: 'neck', label: 'Neck Type', type: 'text' },
+      { name: 'sleeves', label: 'Sleeves', type: 'text' }
+    ],
+    'Lehenga Choli': [
+      { name: 'fabric', label: 'Fabric', type: 'text' },
+      { name: 'work', label: 'Work', type: 'text' },
+      { name: 'flare', label: 'Flare', type: 'text' },
+      { name: 'dupatta', label: 'Dupatta', type: 'text' }
+    ],
+    'Gowns': [
+      { name: 'fabric', label: 'Fabric', type: 'text' },
+      { name: 'length', label: 'Length', type: 'text' },
+      { name: 'neck', label: 'Neck', type: 'text' }
+    ],
+    'Anarkali': [
+      { name: 'fabric', label: 'Fabric', type: 'text' },
+      { name: 'flare', label: 'Flare', type: 'text' },
+      { name: 'work', label: 'Work', type: 'text' }
+    ]
+  };
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user || user.role !== 'admin') {
+      navigate('/login');
+    }
+  }, [navigate]);
+
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    if (images.length + files.length > 5) {
+      alert('Maximum 5 images allowed');
+      return;
+    }
+
+    setImages([...images, ...files]);
+    const bundle = files.map(file => URL.createObjectURL(file));
+    setPreviews([...previews, ...bundle]);
+  };
+
+  const removeImage = (index) => {
+    const newImages = [...images];
+    newImages.splice(index, 1);
+    setImages(newImages);
+
+    const newPreviews = [...previews];
+    newPreviews.splice(index, 1);
+    setPreviews(newPreviews);
+  };
+
+  const handleSpecChange = (name, value) => {
+    setFormData({
+      ...formData,
+      specifications: {
+        ...formData.specifications,
+        [name]: value
+      }
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (images.length === 0) {
+      alert('Please upload at least one image');
+      return;
+    }
+
+    setLoading(true);
+    const data = new FormData();
+    data.append('name', formData.name);
+    data.append('price', formData.price);
+    data.append('stock', formData.stock);
+    data.append('category', category);
+    data.append('specifications', JSON.stringify(formData.specifications));
+    
+    images.forEach(image => {
+      data.append('images', image);
+    });
+
+    try {
+      await axios.post(`${API_BASE_URL}/api/admin/products`, data, {
+        headers: { 'Content-Type': 'multipart/form-data' }
       });
+
       alert('Product added successfully!');
       navigate('/admin/products');
     } catch (error) {

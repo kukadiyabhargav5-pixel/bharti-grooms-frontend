@@ -3,7 +3,25 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiShield, FiCopy, FiCheckCircle, FiArrowLeft } from 'react-icons/fi';
 import axios from 'axios';
-import { API_BASE_URL } from '../apiConfig';        setSetupData(res.data);
+import { API_BASE_URL } from '../apiConfig';
+
+const Admin2FASetup = () => {
+  const navigate = useNavigate();
+  const [setupData, setSetupData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user || user.role !== 'admin') {
+      navigate('/login');
+    }
+
+    const fetchSetup = async () => {
+      try {
+        const res = await axios.get(`${API_BASE_URL}/api/admin/2fa-setup`);
+        setSetupData(res.data);
+
       } catch (err) {
         console.error('Failed to fetch 2FA setup:', err);
       } finally {

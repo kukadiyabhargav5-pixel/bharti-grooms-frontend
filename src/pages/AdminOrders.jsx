@@ -3,13 +3,30 @@ import { useNavigate, useParams, Link } from 'react-router-dom';
 import { FiHome, FiPackage, FiArrowLeft, FiSearch, FiEye, FiClock, FiBox, FiTruck, FiCheck, FiShoppingBag, FiTrash2, FiDownload } from 'react-icons/fi';
 import axios from 'axios';
 import html2pdf from 'html2pdf.js';
-import { API_BASE_URL } from '../apiConfig';            setOrders(res.data);
+import { API_BASE_URL } from '../apiConfig';
+import '../styles/Admin.css';
+
+const AdminOrders = () => {
+    const { status } = useParams();
+    const navigate = useNavigate();
+    const [orders, setOrders] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const fetchOrders = async () => {
+        setLoading(true);
+        try {
+            const res = await axios.get(`${API_BASE_URL}/api/admin/orders`, {
+                params: { status }
+            });
+            setOrders(res.data);
         } catch (error) {
             console.error('Failed to fetch orders:', error);
         } finally {
             setLoading(false);
         }
     };
+
 
     const handleStatusUpdate = async (orderId, nextStatus) => {
         try {

@@ -2,7 +2,24 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { FiHome, FiPackage, FiArrowLeft, FiSearch, FiEye, FiEdit2, FiTrash2, FiBox, FiAlertCircle, FiXCircle } from 'react-icons/fi';
 import axios from 'axios';
-import { API_BASE_URL } from '../apiConfig';            fetchProducts(); // Refresh list, product might move to another page
+import { API_BASE_URL } from '../apiConfig';
+import '../styles/Admin.css';
+
+const AdminStock = () => {
+    const { status } = useParams();
+    const navigate = useNavigate();
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [editingStock, setEditingStock] = useState({});
+
+    const handleUpdateStock = async (productId) => {
+        const newStock = editingStock[productId];
+        if (newStock === undefined) return;
+        try {
+            await axios.put(`${API_BASE_URL}/api/admin/products/${productId}/stock`, { stock: newStock });
+            fetchProducts(); // Refresh list, product might move to another page
+
         } catch (error) {
             console.error('Failed to update stock:', error);
             alert('Failed to update stock');

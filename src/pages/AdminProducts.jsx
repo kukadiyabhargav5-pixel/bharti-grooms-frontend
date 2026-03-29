@@ -2,7 +2,37 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FiHome, FiUsers, FiPackage, FiLogOut, FiMenu, FiX, FiSearch, FiEdit2, FiTrash2, FiEye, FiPlus } from 'react-icons/fi';
 import axios from 'axios';
-import { API_BASE_URL, getImageUrl } from '../apiConfig';      setProducts(res.data);
+import { API_BASE_URL, getImageUrl } from '../apiConfig';
+import '../styles/Admin.css';
+
+const AdminProducts = () => {
+  const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [modalMode, setModalMode] = useState(null); // 'view', 'edit'
+  const [formData, setFormData] = useState({
+    name: '',
+    price: '',
+    category: ''
+  });
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user || user.role !== 'admin') {
+      navigate('/login');
+    }
+    window.scrollTo(0, 0);
+    fetchProducts();
+  }, [navigate]);
+
+  const fetchProducts = async () => {
+    try {
+      const res = await axios.get(`${API_BASE_URL}/api/products`);
+      setProducts(res.data);
+
     } catch (error) {
       console.error('Failed to fetch products:', error);
     } finally {

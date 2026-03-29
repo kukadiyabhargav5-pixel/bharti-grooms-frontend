@@ -7,7 +7,27 @@ import {
   FiSend, FiChevronRight, FiCalendar, FiUser, FiInfo
 } from 'react-icons/fi';
 import axios from 'axios';
-import { API_BASE_URL } from '../apiConfig';      setComplaints(res.data);
+import { API_BASE_URL } from '../apiConfig';
+import '../styles/Admin.css';
+
+const AdminComplaints = () => {
+  const navigate = useNavigate();
+  const [complaints, setComplaints] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedInquiry, setSelectedInquiry] = useState(null);
+  const [replyText, setReplyText] = useState('');
+  const [isSending, setIsSending] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filterStatus, setFilterStatus] = useState('All');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const fetchComplaints = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get(`${API_BASE_URL}/api/complaints`);
+      setComplaints(res.data);
+
     } catch (error) {
       console.error('Failed to fetch complaints:', error);
     } finally {

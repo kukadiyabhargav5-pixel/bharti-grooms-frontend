@@ -2,7 +2,29 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { FiArrowLeft, FiUser, FiPackage, FiMapPin, FiPhone, FiMail, FiCreditCard, FiClock, FiBox, FiTruck, FiCheck, FiPrinter } from 'react-icons/fi';
 import axios from 'axios';
-import { API_BASE_URL } from '../apiConfig';            setOrder(res.data);
+import { API_BASE_URL } from '../apiConfig';
+import '../styles/Admin.css';
+
+const AdminOrderDetails = () => {
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const [order, setOrder] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!user || user.role !== 'admin') {
+            navigate('/login');
+        }
+        window.scrollTo(0, 0);
+        fetchOrderDetails();
+    }, [id, navigate]);
+
+    const fetchOrderDetails = async () => {
+        try {
+            const res = await axios.get(`${API_BASE_URL}/api/admin/orders/${id}`);
+            setOrder(res.data);
+
         } catch (error) {
             console.error('Failed to fetch order details:', error);
         } finally {

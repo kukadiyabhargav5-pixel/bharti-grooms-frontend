@@ -2,7 +2,38 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FiHome, FiUsers, FiPackage, FiLogOut, FiMenu, FiX, FiSearch, FiEdit2, FiTrash2, FiEye } from 'react-icons/fi';
 import axios from 'axios';
-import { API_BASE_URL } from '../apiConfig';      setUsers(res.data);
+import { API_BASE_URL } from '../apiConfig';
+import '../styles/Admin.css';
+
+const AdminUsers = () => {
+  const navigate = useNavigate();
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [modalMode, setModalMode] = useState(null); // 'view', 'edit'
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    mobileNumber: '',
+    address: ''
+  });
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user || user.role !== 'admin') {
+      navigate('/login');
+    }
+    window.scrollTo(0, 0);
+    fetchUsers();
+  }, [navigate]);
+
+  const fetchUsers = async () => {
+    try {
+      const res = await axios.get(`${API_BASE_URL}/api/admin/users`);
+      setUsers(res.data);
+
     } catch (error) {
       console.error('Failed to fetch users:', error);
     } finally {
