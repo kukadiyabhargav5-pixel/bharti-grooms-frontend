@@ -34,40 +34,65 @@
 
     <!-- Advanced SEO: JSON-LD Structured Data for Google -->
     <script type="application/ld+json">
-    {
+    [{
       "@context": "https://schema.org",
-      "@type": "Organization",
+      "@type": "LocalBusiness",
       "name": "Bharti Glooms",
+      "image": "https://www.bhartiglooms.in/logo.png",
+      "@id": "https://www.bhartiglooms.in/",
       "url": "https://www.bhartiglooms.in/",
-      "logo": "https://www.bhartiglooms.in/logo.png",
-      "description": "Premium destination for exquisite ethical wear, traditional sarees, lehengas, and designer dresses in Surat, Gujarat.",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+91-8128090833",
-        "contactType": "customer service",
-        "email": "bhartiglooms@gmail.com",
-        "availableLanguage": "en, gu, hi"
+      "telephone": "+918128090833",
+      "priceRange": "₹₹₹",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Surat Textile Market",
+        "addressLocality": "Surat",
+        "addressRegion": "GJ",
+        "postalCode": "395002",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 21.1702,
+        "longitude": 72.8311
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "09:00",
+        "closes": "21:00"
       },
       "sameAs": [
-        "https://facebook.com/bhartiglooms",
-        "https://instagram.com/bharti_glooms",
+        "https://www.facebook.com/bhartiglooms",
+        "https://www.instagram.com/bharti_glooms",
         "https://pinterest.com/bhartiglooms"
       ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org/",
+    }, {
+      "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "Bharti Glooms",
+      "name": "Bharti Glooms | Premium Ethnic Wear",
       "url": "https://www.bhartiglooms.in/",
       "potentialAction": {
         "@type": "SearchAction",
         "target": "https://www.bhartiglooms.in/product?search={search_term_string}",
         "query-input": "required name=search_term_string"
       }
-    }
+    }, {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": [
+        { "@type": "SiteNavigationElement", "position": 1, "name": "Latest Collections", "url": "https://www.bhartiglooms.in/product" },
+        { "@type": "SiteNavigationElement", "position": 2, "name": "Premium Sarees", "url": "https://www.bhartiglooms.in/product?category=Saree" },
+        { "@type": "SiteNavigationElement", "position": 3, "name": "Bridal Lehengas", "url": "https://www.bhartiglooms.in/product?category=Lehenga" }
+      ]
+    }]
     </script>
+    
+    <!-- Geo Location Tags for Local SEO (Surat/Gujarat) -->
+    <meta name="geo.region" content="IN-GJ" />
+    <meta name="geo.placename" content="Surat" />
+    <meta name="geo.position" content="21.1702;72.8311" />
+    <meta name="ICBM" content="21.1702, 72.8311" />
 
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   </head>
