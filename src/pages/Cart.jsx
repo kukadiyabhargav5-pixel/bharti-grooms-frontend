@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { FiShoppingBag, FiArrowRight, FiTrash2, FiMinus, FiPlus, FiChevronLeft } from 'react-icons/fi';
+import { FiShoppingBag, FiArrowRight, FiTrash2, FiMinus, FiPlus, FiChevronLeft, FiShield } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '../context/CartContext';
@@ -21,20 +21,28 @@ const Cart = () => {
         <div className="cart-page">
           <div className="container">
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="empty-cart-premium"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ type: "spring", stiffness: 200, damping: 20 }}
+              className="empty-cart-premium glass-panel"
             >
-              <div style={{ width: '120px', height: '120px', borderRadius: '50%', background: '#fff', color: 'var(--maroon)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3.5rem', margin: '0 auto 30px', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
+              <motion.div 
+                initial={{ rotate: -10 }}
+                animate={{ rotate: 0 }}
+                transition={{ type: "spring", bounce: 0.5, duration: 1 }}
+                className="empty-icon-circle"
+              >
                 <FiShoppingBag />
-              </div>
-              <h2 style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--text-dark)', marginBottom: '16px', fontFamily: 'Playfair Display, serif' }}>Your Bag is Empty</h2>
-              <p style={{ fontSize: '1.2rem', color: 'var(--text-gray)', marginBottom: '40px', maxWidth: '500px', margin: '0 auto 40px', lineHeight: 1.6 }}>
-                It looks like you haven't discovered your next favorite saree yet. Explore our latest arrivals today!
+              </motion.div>
+              <h2 className="empty-title font-serif">Your Cart is Empty</h2>
+              <p className="empty-subtitle">
+                It looks like you haven't discovered your next favorite piece yet. Explore our latest premium arrivals today!
               </p>
-              <Link to="/product" className="btn-checkout-premium" style={{ display: 'inline-flex', width: 'auto', padding: '18px 50px', textDecoration: 'none' }}>
-                Start Shopping <FiArrowRight style={{ marginLeft: '10px' }} />
-              </Link>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Link to="/product" className="btn-solid-gold">
+                  Discover Collections <FiArrowRight className="ml-2" style={{ marginLeft: '10px' }} />
+                </Link>
+              </motion.div>
             </motion.div>
           </div>
         </div>
@@ -48,24 +56,25 @@ const Cart = () => {
       <div className="cart-page">
         <div className="container">
           <div className="cart-header">
-            <button className="back-btn" onClick={() => navigate('/product')} style={{ marginBottom: '20px' }}>
-              <FiChevronLeft /> Back to Shop
+            <button className="back-link-gold" onClick={() => navigate('/product')}>
+              <FiChevronLeft /> Continue Shopping
             </button>
-            <h1>Shopping Bag</h1>
+            <h1 className="font-serif page-title">Shopping Cart <span>({cartItems.length} items)</span></h1>
           </div>
 
           <div className="cart-container">
             {/* Left: Items List */}
             <div className="cart-items-list">
-              <AnimatePresence>
+              <AnimatePresence mode="popLayout">
                 {cartItems.map((item) => (
                   <motion.div 
                     key={item._id} 
-                    className="cart-item-premium"
-                    initial={{ opacity: 0, x: -20 }}
+                    className="cart-item-premium glass-panel"
+                    initial={{ opacity: 0, x: -40 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    layout
+                    exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.2 } }}
+                    layout="position"
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   >
                     <div className="cart-item-image">
                       <img 
@@ -75,32 +84,39 @@ const Cart = () => {
                     </div>
                     
                     <div className="cart-item-info">
+                      <div className="cart-item-cat">{item.category}</div>
                       <div className="cart-item-title">{item.name}</div>
-                      <div className="cart-item-meta">Category: {item.category}</div>
                       <div className="cart-item-price-unit">₹{item.price.toLocaleString()}</div>
                     </div>
 
                     <div className="cart-item-ops">
-                      <div className="premium-qty">
-                        <button 
-                          className="premium-qty-btn" 
+                      <div className="premium-qty-controls">
+                        <motion.button 
+                          whileTap={{ scale: 0.8 }}
+                          className="qty-btn" 
                           onClick={() => updateQuantity(item._id, item.quantity - 1)}
                           disabled={item.quantity <= 1}
                         >
                           <FiMinus />
-                        </button>
+                        </motion.button>
                         <span className="qty-val">{item.quantity}</span>
-                        <button 
-                          className="premium-qty-btn" 
+                        <motion.button 
+                          whileTap={{ scale: 0.8 }}
+                          className="qty-btn" 
                           onClick={() => updateQuantity(item._id, item.quantity + 1)}
                         >
                           <FiPlus />
-                        </button>
+                        </motion.button>
                       </div>
                       
-                      <button className="premium-remove" onClick={() => removeFromCart(item._id)}>
+                      <motion.button 
+                        whileHover={{ scale: 1.05, color: '#ef4444' }}
+                        whileTap={{ scale: 0.9 }}
+                         className="btn-remove-item" 
+                        onClick={() => removeFromCart(item._id)}
+                      >
                         <FiTrash2 /> Remove
-                      </button>
+                      </motion.button>
                     </div>
                   </motion.div>
                 ))}
@@ -109,43 +125,47 @@ const Cart = () => {
 
             {/* Right: Summary Card */}
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              className="cart-summary-premium"
+              transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+              className="cart-summary-premium glass-panel"
             >
-              <h2 className="summary-title-premium">Order Summary</h2>
+              <h2 className="summary-title font-serif">Order Summary</h2>
               
               <div className="summary-details">
                 <div className="detail-line">
-                  <span>Subtotal ({cartItems.length} items)</span>
-                  <span>₹{cartTotal.toLocaleString()}</span>
+                  <span className="text-gray">Subtotal</span>
+                  <span className="font-bold">₹{cartTotal.toLocaleString()}</span>
                 </div>
                 <div className="detail-line">
-                  <span>Standard Delivery</span>
-                  <span style={{ color: '#059669', fontWeight: 'bold' }}>FREE</span>
+                  <span className="text-gray">Shipping</span>
+                  <span className="text-green uppercase fw-800">Complimentary</span>
                 </div>
                 <div className="detail-line">
-                  <span>Estimated Tax</span>
-                  <span>₹0</span>
+                  <span className="text-gray">Estimated Tax</span>
+                  <span className="font-bold">₹0</span>
                 </div>
+                
+                <div className="summary-divider"></div>
+                
                 <div className="detail-line grand-total">
-                  <span>Total Amount</span>
-                  <span>₹{cartTotal.toLocaleString()}</span>
+                  <span>Total</span>
+                  <span className="text-maroon">₹{cartTotal.toLocaleString()}</span>
                 </div>
               </div>
 
-              <button className="btn-checkout-premium" onClick={() => navigate('/checkout')}>
-                Secure Checkout
-              </button>
+              <motion.button 
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="btn-solid-maroon w-100" 
+                onClick={() => navigate('/checkout')}
+              >
+                Secure Checkout <FiArrowRight style={{ marginLeft: '10px' }} />
+              </motion.button>
 
-
-              <div style={{ marginTop: '24px', textAlign: 'center' }}>
-                <p style={{ fontSize: '0.85rem', color: 'var(--text-gray)', marginBottom: '15px' }}>
-                  We accept all major credit cards and UPI.
-                </p>
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', color: '#cbd5e1', fontSize: '1.5rem' }}>
-                  {/* Secure payment icons would go here */}
-                </div>
+              <div className="secure-checkout-badge">
+                <FiShield className="shield-icon" /> 
+                <span>100% Secure Checkout</span>
               </div>
             </motion.div>
           </div>
