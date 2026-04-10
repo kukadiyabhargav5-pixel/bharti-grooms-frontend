@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /admin/*
+Disallow: /profile
+Disallow: /checkout
+Disallow: /cart
+Disallow: /wishlist
+Disallow: /forgot-password
+
+Sitemap: https://www.bhartiglooms.in/sitemap.xml
