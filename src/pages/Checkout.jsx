@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import { FiUser, FiMail, FiPhone, FiMapPin, FiArrowLeft, FiLock, FiCheckCircle } from 'react-icons/fi';
+import { FiUser, FiMail, FiPhone, FiMapPin, FiArrowLeft, FiArrowRight, FiLock, FiCheckCircle, FiShield } from 'react-icons/fi';
 import { useCart } from '../context/CartContext';
 import Footer from '../components/Footer';
 import { API_BASE_URL, getImageUrl } from '../apiConfig';
@@ -103,7 +103,6 @@ const Checkout = () => {
           const verifyData = await verifyRes.json();
 
           if (verifyRes.ok) {
-            // Redirect to Invoice on success
             navigate('/invoice', {
               state: {
                 paymentId: response.razorpay_payment_id,
@@ -141,37 +140,46 @@ const Checkout = () => {
     }
   };
 
-
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
+    hidden: { opacity: 0, x: -30 },
+    visible: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
   };
 
   return (
     <>
       <div className="checkout-page">
         <div className="container">
-          {/* Progress Indicator */}
-          <div className="checkout-progress">
-             <div className="progress-step completed"><span>1</span> Bag</div>
+          
+          {/* Animated Progress Indicator */}
+          <motion.div 
+            initial={{ y: -30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
+            className="checkout-progress"
+          >
+             <div className="progress-step completed"><span><FiCheckCircle /></span> Cart</div>
              <div className="progress-line active"></div>
-             <div className="progress-step active"><span>2</span> Shipping</div>
+             <div className="progress-step active">
+               <motion.span 
+                 initial={{ scale: 0 }} 
+                 animate={{ scale: 1 }} 
+                 transition={{ type: "spring", bounce: 0.5, delay: 0.2 }}
+               >
+                 2
+               </motion.span> 
+               Shipping
+             </div>
              <div className="progress-line"></div>
              <div className="progress-step"><span>3</span> Payment</div>
-          </div>
+          </motion.div>
 
           <button className="back-link" onClick={() => navigate('/cart')}>
-            <FiArrowLeft /> Back to Shopping Bag
+            <FiArrowLeft /> Back to Shopping Cart
           </button>
 
           <div className="checkout-grid">
@@ -186,79 +194,90 @@ const Checkout = () => {
               <motion.p variants={itemVariants} className="checkout-subtitle">Where should we send your exquisite selection?</motion.p>
 
               <form onSubmit={handleSubmit} className="premium-form">
-                <motion.div variants={itemVariants} className="form-group-premium">
-                  <label><FiUser /> Full Name</label>
+                
+                {/* Floating Label Input Group */}
+                <motion.div variants={itemVariants} className="luxury-form-group">
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="Enter your full name"
+                    className="luxury-input"
+                    placeholder=" "
                     required
                   />
+                  <label className="luxury-label"><FiUser className="mr-2" /> Full Name</label>
+                  <div className="luxury-input-border"></div>
                 </motion.div>
 
-                <motion.div variants={itemVariants} className="form-row-premium">
-                  <div className="form-group-premium">
-                    <label><FiMail /> Email Address</label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="name@example.com"
-                      required
-                    />
-                  </div>
-                  <div className="form-group-premium">
-                    <label><FiPhone /> Mobile Number</label>
-                    <input
-                      type="tel"
-                      name="mobileNumber"
-                      value={formData.mobileNumber}
-                      onChange={handleChange}
-                      placeholder="Enter 10 digit number"
-                      required
-                    />
-                  </div>
+                <motion.div variants={itemVariants} className="luxury-form-group">
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="luxury-input"
+                    placeholder=" "
+                    required
+                  />
+                  <label className="luxury-label"><FiMail className="mr-2" /> Email Address</label>
+                  <div className="luxury-input-border"></div>
+                </motion.div>
+                
+                <motion.div variants={itemVariants} className="luxury-form-group">
+                  <input
+                    type="tel"
+                    name="mobileNumber"
+                    value={formData.mobileNumber}
+                    onChange={handleChange}
+                    className="luxury-input"
+                    placeholder=" "
+                    required
+                  />
+                  <label className="luxury-label"><FiPhone className="mr-2" /> Mobile Number</label>
+                  <div className="luxury-input-border"></div>
                 </motion.div>
 
-                <motion.div variants={itemVariants} className="form-group-premium">
-                  <label><FiMapPin /> Delivery Address</label>
+                <motion.div variants={itemVariants} className="luxury-form-group">
                   <textarea
                     name="address"
                     value={formData.address}
                     onChange={handleChange}
-                    placeholder="Full house address, landmark, city, state, pincode"
+                    className="luxury-input textarea"
+                    placeholder=" "
                     required
                     rows="4"
                   ></textarea>
+                  <label className="luxury-label"><FiMapPin className="mr-2" /> Delivery Address</label>
+                  <div className="luxury-input-border"></div>
                 </motion.div>
 
-
-
                 <motion.div variants={itemVariants} className="payment-notice-premium">
-                  <FiLock /> Your information is encrypted and processed securely.
+                  <div className="notice-icon"><FiShield /></div>
+                  <p>Your personal information is encrypted and securely processed.</p>
                 </motion.div>
 
                 <motion.button 
                   variants={itemVariants}
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.02, boxShadow: "0 20px 45px rgba(128,0,32,0.4)" }}
                   whileTap={{ scale: 0.98 }}
                   type="submit" 
                   className="btn-place-order-premium"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? 'Processing...' : 'Proceed to Payment'} <FiCheckCircle style={{ marginLeft: '10px' }} />
+                  <span className="btn-text">{isSubmitting ? 'Processing...' : 'Proceed to Payment'}</span> 
+                  {!isSubmitting && <FiArrowRight className="btn-icon" />}
+                  {/* Decorative Shine Element */}
+                  <div className="btn-shine"></div>
                 </motion.button>
               </form>
             </motion.div>
 
             {/* Right: Order Summary */}
             <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3 }}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ type: "spring", stiffness: 200, damping: 25, delay: 0.2 }}
               className="checkout-summary-section"
             >
               <div className="summary-glass-card">
@@ -271,13 +290,13 @@ const Checkout = () => {
                   {cartItems.map((item, idx) => (
                     <motion.div 
                       key={item._id} 
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.5 + (idx * 0.1) }}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ type: "spring", delay: 0.4 + (idx * 0.1) }}
                       className="summary-item-premium"
                     >
                       <div className="summary-item-img-box">
-                        <img src={getImageUrl(item.images[0])} alt={item.name} />
+                        <img src={getImageUrl(item.images && item.images.length > 0 ? item.images[0] : '')} alt={item.name} />
                         <span className="qty-badge">{item.quantity}</span>
                       </div>
                       <div className="summary-item-info">
@@ -291,9 +310,9 @@ const Checkout = () => {
                 <div className="summary-divider"></div>
 
                 <div className="summary-details-premium">
-                  <div className="summary-line">
+                  <div className="summary-line text-gray">
                     <span>Subtotal</span>
-                    <span>₹{cartTotal.toLocaleString()}</span>
+                    <span className="fw-700 text-dark">₹{cartTotal.toLocaleString()}</span>
                   </div>
                   <div className="summary-line">
                     <span>Shipping</span>
@@ -318,6 +337,5 @@ const Checkout = () => {
     </>
   );
 };
-
 
 export default Checkout;
