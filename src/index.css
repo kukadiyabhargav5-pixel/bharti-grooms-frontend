@@ -1,26 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 
 /* ===== CSS VARIABLES ===== */
 :root {
-  --maroon: #3a000f; 
-  --maroon-dark: #1f0007;
-  --maroon-light: #5c0018;
-  --maroon-ultra-light: #fdf5f5;
-  --gold: #c5a022;
-  --gold-light: #d4af37;
-  --gold-dark: #a68a18;
-  --cream: #fffdf5;
+  --maroon: #8B1A4A; 
+  --maroon-dark: #5C0F30;
+  --maroon-light: #B0255E;
+  --maroon-ultra-light: #FFF0F5;
+  --gold: #D4AF37;
+  --gold-light: #e6c86a;
+  --gold-dark: #aa8a29;
+  --cream: #FFF5F8;
   --white: #ffffff;
-  --off-white: #fafafa;
-  --light-gray: #f1f5f9;
-  --text-dark: #1a0a0a;
-  --text-gray: #64748b;
-  --shadow: 0 10px 30px rgba(58, 0, 15, 0.08);
-  --shadow-lg: 0 20px 50px rgba(58, 0, 15, 0.12);
-  --glass: rgba(255, 255, 255, 0.7);
-  --radius: 12px;
-  --radius-lg: 24px;
-  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --off-white: #fffcfd;
+  --light-gray: #f8f0f4;
+  --text-dark: #1a1a1a;
+  --text-gray: #555555;
+  --shadow: 0 10px 30px rgba(139, 26, 74, 0.05);
+  --shadow-lg: 0 20px 50px rgba(139, 26, 74, 0.10);
+  --glass: rgba(255, 255, 255, 0.88);
+  --radius: 8px;
+  --radius-lg: 16px;
+  --transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 /* ===== RESET ===== */
@@ -78,6 +78,10 @@ button {
   background: var(--maroon-dark);
 }
 
+.font-serif {
+  font-family: 'Playfair Display', serif;
+}
+
 /* ===== UTILITY CLASSES ===== */
 .container {
   max-width: 1200px;
@@ -119,17 +123,18 @@ button {
   font-weight: 700;
   font-size: 1rem;
   letter-spacing: 0.5px;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.4);
   transition: var(--transition);
-  box-shadow: 0 8px 20px rgba(58, 0, 15, 0.2);
+  box-shadow: 0 8px 20px rgba(139, 26, 74, 0.22);
   position: relative;
   overflow: hidden;
 }
 
 .btn-primary:hover {
   transform: translateY(-4px);
-  box-shadow: 0 15px 35px rgba(58, 0, 15, 0.3);
+  box-shadow: 0 15px 35px rgba(139, 26, 74, 0.32);
   background: var(--maroon-light);
+  border-color: rgba(255, 255, 255, 0.8);
 }
 
 .btn-outline {
@@ -137,19 +142,20 @@ button {
   align-items: center;
   gap: 10px;
   background: transparent;
-  color: var(--maroon);
+  color: var(--white);
   padding: 14px 34px;
   border-radius: 50px;
   font-weight: 700;
   font-size: 1rem;
-  border: 2px solid var(--maroon);
+  border: 2px solid var(--white);
   transition: var(--transition);
 }
 
 .btn-outline:hover {
-  background: var(--maroon-ultra-light);
+  background: var(--white);
+  color: var(--maroon);
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(58, 0, 15, 0.1);
+  box-shadow: 0 8px 20px rgba(139, 26, 74, 0.12);
 }
 
 /* Luxury Utilities */
@@ -161,7 +167,7 @@ button {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, var(--maroon), var(--gold-dark));
+  background: linear-gradient(135deg, var(--maroon), #D4AF37);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -243,13 +249,50 @@ button {
   animation: float 4s ease-in-out infinite;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ===== GLOBAL RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 992px) {
+  .container {
+    padding: 0 20px;
+  }
+  .section-subtitle {
+    margin-bottom: 40px;
+    font-size: 1rem;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 0 16px;
   }
-  
+  .section-title {
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+  }
   .section-subtitle {
-    margin-bottom: 40px;
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+  }
+  .btn-primary, .btn-outline {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 14px;
+  }
+  .section-title {
+    font-size: clamp(1.4rem, 6vw, 2rem);
+  }
+  .btn-primary, .btn-outline {
+    padding: 11px 20px;
+    font-size: 0.85rem;
+    gap: 6px;
   }
 }
