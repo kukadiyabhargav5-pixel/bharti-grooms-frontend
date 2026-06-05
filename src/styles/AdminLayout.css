@@ -1,0 +1,377 @@
+/* ============================================================
+   ULTRA-LUXURY ADMIN LAYOUT - "HEIRLOOM SYSTEM"
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Outfit:wght@300;400;600;800&display=swap');
+
+:root {
+  --admin-maroon-deep: #4A0012;
+  --admin-maroon-light: #600018;
+  --admin-maroon-gradient: linear-gradient(135deg, #2D000B 0%, #4A0012 50%, #600018 100%);
+  --admin-gold: #D4AF37;
+  --admin-gold-glow: rgba(212, 175, 55, 0.4);
+  --admin-glass-bg: rgba(255, 255, 255, 0.95);
+  --admin-glass-dark: rgba(0, 0, 0, 0.05);
+  --admin-border-gold: rgba(212, 175, 55, 0.3);
+  --admin-shadow-luxe: 0 20px 60px rgba(0, 0, 0, 0.12);
+  --nav-height: 95px;
+}
+
+.luxury-admin-layout {
+  min-height: 100vh;
+  background: #fdfdfd;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(96, 0, 24, 0.03) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(212, 175, 55, 0.03) 0px, transparent 50%);
+  color: #0f172a;
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+}
+
+/* --- Floating Top Navigation --- */
+.luxury-top-nav {
+  position: fixed;
+  top: 15px;
+  left: 20px;
+  right: 20px;
+  height: calc(var(--nav-height) - 20px);
+  background: var(--admin-maroon-gradient);
+  backdrop-filter: blur(20px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  border-radius: 24px;
+  border: 1px solid var(--admin-border-gold);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255,255,255,0.1);
+}
+
+.nav-container {
+  width: 100%;
+  padding: 0 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+  color: white;
+}
+
+.brand-icon-luxury {
+  width: 50px;
+  height: 50px;
+  background: white;
+  color: var(--admin-maroon-deep);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.4rem;
+  box-shadow: 0 0 20px var(--admin-gold-glow);
+  border: 2px solid var(--admin-gold);
+}
+
+.brand-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.desktop-menu {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-link-premium {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 16px;
+  letter-spacing: 0.5px;
+}
+
+.nav-link-premium:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.nav-link-premium.active {
+  color: white;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1));
+  border: 1px solid var(--admin-border-gold);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.nav-underline {
+  position: absolute;
+  bottom: 8px;
+  left: 24px;
+  right: 24px;
+  height: 2px;
+  background: var(--admin-gold);
+  border-radius: 2px;
+  box-shadow: 0 0 10px var(--admin-gold-glow);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.action-icon-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.action-icon-btn:hover {
+  background: var(--admin-gold);
+  color: var(--admin-maroon-deep);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px var(--admin-gold-glow);
+}
+
+/* --- Profile Hub --- */
+.admin-profile-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 6px 18px 6px 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.admin-profile-dropdown:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--admin-gold);
+}
+
+.profile-img-premium {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--admin-gold);
+  box-shadow: 0 0 10px var(--admin-gold-glow);
+}
+
+.admin-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+.profile-menu-luxury {
+  position: absolute;
+  top: 130%;
+  right: 0;
+  width: 280px;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 25px 70px rgba(0,0,0,0.2);
+  padding: 20px;
+  border: 1px solid var(--admin-border-gold);
+  z-index: 1001;
+}
+
+.menu-header { padding: 5px 10px 15px; }
+.menu-header strong { font-size: 1.1rem; color: var(--admin-maroon-deep); font-family: 'Playfair Display'; }
+.menu-header span { font-size: 0.8rem; color: #64748b; margin-top: 2px; display: block; }
+
+.menu-item-logout {
+  width: 100%;
+  padding: 15px;
+  border-radius: 16px;
+  border: none;
+  background: var(--admin-maroon-gradient);
+  color: white;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.menu-item-logout:hover {
+  background: #ff4757;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(239, 68, 68, 0.3);
+}
+
+/* --- Fluid Main Content --- */
+/* --- Imperial Content Header --- */
+.content-page-header { 
+  margin-bottom: 50px; 
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.breadcrumb {
+  font-size: 0.75rem;
+  color: var(--admin-gold);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 800;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.breadcrumb::before {
+  content: '';
+  width: 30px;
+  height: 2px;
+  background: var(--admin-gold);
+}
+
+.luxury-page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.2rem;
+  font-weight: 900;
+  color: var(--admin-maroon-deep);
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+/* --- Global Imperial Business Components --- */
+
+.imperial-card {
+  background: white;
+  border-radius: 35px;
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  padding: 40px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.04);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.imperial-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--admin-gold);
+  box-shadow: 0 30px 80px rgba(96, 0, 24, 0.08);
+}
+
+.imperial-table-container {
+  overflow-x: auto;
+  border-radius: 30px;
+}
+
+.imperial-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px;
+}
+
+.imperial-table th {
+  padding: 15px 25px;
+  text-align: left;
+  font-size: 0.7rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 900;
+}
+
+.imperial-table tbody tr {
+  background: #fafbfc;
+  transition: all 0.3s;
+}
+
+.imperial-table tbody tr:hover {
+  background: white;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transform: scale(1.002);
+}
+
+.imperial-table td {
+  padding: 20px 25px;
+}
+
+.imperial-status-pill {
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-block;
+}
+
+.imperial-status-pill.success { background: rgba(5, 150, 105, 0.08); color: #059669; }
+.imperial-status-pill.warning { background: rgba(217, 119, 6, 0.08); color: #d97706; }
+.imperial-status-pill.danger { background: rgba(220, 38, 38, 0.08); color: #dc2626; }
+.imperial-status-pill.primary { background: rgba(96, 0, 24, 0.08); color: var(--admin-maroon-deep); }
+
+/* --- Tablet/Mobile Optimizations --- */
+@media (max-width: 1024px) {
+  .luxury-top-nav { left: 10px; right: 10px; top: 10px; height: 65px; border-radius: 15px; }
+  .luxury-main-content-fluid { padding: 30px 20px; }
+  .luxury-page-title { font-size: 2.2rem; }
+  .imperial-card { padding: 25px; border-radius: 24px; }
+  .desktop-menu { display: none; }
+  .nav-left { gap: 20px; }
+}
+
+@media (max-width: 768px) {
+  .luxury-top-nav { left: 8px; right: 8px; top: 8px; height: 60px; border-radius: 14px; padding: 0; }
+  .nav-container { padding: 0 20px; }
+  .luxury-main-content-fluid { padding: 20px 16px; }
+  .luxury-page-title { font-size: 1.8rem; letter-spacing: -0.5px; }
+  .content-page-header { flex-direction: column; align-items: flex-start; gap: 15px; margin-bottom: 30px; }
+  .imperial-card { padding: 20px; border-radius: 20px; }
+  .brand-text { font-size: 1.3rem; }
+  .brand-icon-luxury { width: 40px; height: 40px; font-size: 1.1rem; border-radius: 12px; }
+  .admin-name { display: none; }
+  .action-icon-btn { width: 38px; height: 38px; border-radius: 10px; }
+  .profile-img-premium { width: 34px; height: 34px; }
+  .admin-profile-dropdown { padding: 4px 12px 4px 4px; gap: 8px; }
+  .imperial-table td { padding: 14px 16px; }
+  .imperial-table th { padding: 10px 16px; }
+}
+
+@media (max-width: 480px) {
+  .luxury-top-nav { left: 5px; right: 5px; border-radius: 12px; }
+  .nav-container { padding: 0 14px; }
+  .luxury-page-title { font-size: 1.5rem; }
+  .luxury-main-content-fluid { padding: 16px 12px; }
+  .imperial-card { padding: 16px; border-radius: 16px; }
+  .nav-right { gap: 10px; }
+}

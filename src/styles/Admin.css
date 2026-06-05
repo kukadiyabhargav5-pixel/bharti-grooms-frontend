@@ -73,14 +73,14 @@
 .admin-nav-item:hover {
   background: #f1f3f5;
   color: var(--maroon);
-  border-color: rgba(128, 0, 32, 0.2);
+  border-color: rgba(139, 26, 74, 0.2);
   transform: translateY(-2px);
 }
 
 .admin-nav-item.active {
   color: var(--maroon);
-  background: rgba(128, 0, 32, 0.08); /* Maroon tint */
-  border-color: rgba(128, 0, 32, 0.1);
+  background: rgba(139, 26, 74, 0.08); /* Maroon tint */
+  border-color: rgba(139, 26, 74, 0.1);
 }
 
 /* Right Topbar actions */
@@ -313,7 +313,7 @@
 
 /* Interactive Add Product Card */
 .add-product-card:hover {
-  box-shadow: 0 8px 25px rgba(128, 0, 32, 0.1);
+  box-shadow: 0 8px 25px rgba(139, 26, 74, 0.1);
 }
 
 .admin-stat-icon {
@@ -638,7 +638,7 @@
 
 .btn-delete {
   background: rgba(231, 76, 60, 0.1);
-  color: #c0392b;
+  color: #B0255E;
   border: 1px solid rgba(231, 76, 60, 0.2);
 }
 
@@ -665,7 +665,7 @@
 
 .admin-search-input:focus {
   border-color: var(--maroon) !important;
-  box-shadow: 0 0 0 4px rgba(128, 0, 32, 0.1) !important;
+  box-shadow: 0 0 0 4px rgba(139, 26, 74, 0.1) !important;
 }
 
 .admin-back-btn:hover {
@@ -928,13 +928,13 @@
   justify-content: center;
   gap: 10px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(128, 0, 32, 0.2);
+  box-shadow: 0 4px 12px rgba(139, 26, 74, 0.2);
 }
 
 .admin-btn-save:hover {
   background: #66001a;
   transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(128, 0, 32, 0.3);
+  box-shadow: 0 6px 15px rgba(139, 26, 74, 0.3);
 }
 
 .admin-btn-save:disabled {
@@ -1048,10 +1048,10 @@
 }
 
 .btn-action.accept { background: rgba(46, 204, 113, 0.1); color: #27ae60; border: 1px solid rgba(46, 204, 113, 0.2); }
-.btn-action.cancel { background: rgba(231, 76, 60, 0.1); color: #c0392b; border: 1px solid rgba(231, 76, 60, 0.2); }
+.btn-action.cancel { background: rgba(231, 76, 60, 0.1); color: #B0255E; border: 1px solid rgba(231, 76, 60, 0.2); }
 .btn-action.ship { background: rgba(52, 152, 219, 0.1); color: #2980b9; border: 1px solid rgba(52, 152, 219, 0.2); }
 .btn-action.deliver { background: rgba(155, 89, 182, 0.1); color: #8e44ad; border: 1px solid rgba(155, 89, 182, 0.2); }
-.btn-action.invoice { background: rgba(128, 0, 32, 0.1); color: var(--maroon); border: 1px solid rgba(128, 0, 32, 0.2); }
+.btn-action.invoice { background: rgba(139, 26, 74, 0.1); color: var(--maroon); border: 1px solid rgba(139, 26, 74, 0.2); }
 
 .btn-action:hover {
   transform: translateY(-2px);

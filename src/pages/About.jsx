@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
-import { FiTarget, FiHeart, FiStar, FiShield, FiCheckCircle } from 'react-icons/fi';
+import { useEffect } from 'react';
+import { FiTarget, FiHeart, FiStar, FiShield } from 'react-icons/fi';
+import { motion } from 'framer-motion';
 import Footer from '../components/Footer';
 import '../styles/About.css';
 
@@ -11,136 +12,167 @@ const values = [
 ];
 
 const team = [
-  { name: 'Bhargav J. Kukadiya', role: 'Founder & CEO', img: '/images/team/ceo.png' },
-  { name: 'Tirth N. Italiya', role: 'Co-Founder & CTO', img: '/images/team/designer.png' },
-  { name: 'Roshan D. Balar', role: 'Manager', img: '/images/team/ops.png' },
+  { name: 'Bhargav J. Kukadiya', role: 'Founder & CEO', img: '/images/team/ceo.png', bio: 'Visionary leader bringing modern flair to traditional ethnic wear.' },
+  { name: 'Tirth N. Italiya', role: 'Co-Founder & CTO', img: '/images/team/designer.png', bio: 'Tech innovator ensuring a seamless, world-class luxury shopping experience.' },
+  { name: 'Roshan D. Balar', role: 'Head of Operations', img: '/images/team/ops.png', bio: 'The mastermind guaranteeing our flawless delivery and premium service.' },
 ];
 
-const About = () => {
-  const scrollRefs = useRef([]);
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.2 } }
+};
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 50 },
+  show: { opacity: 1, y: 0, transition: { type: "spring", bounce: 0.4, duration: 1 } }
+};
+
+const About = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry, i) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => {
-              entry.target.style.opacity = '1';
-              entry.target.style.transform = 'translateY(0)';
-            }, (entry.target.dataset.delay || 0) * 100);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    scrollRefs.current.forEach((ref) => {
-      if (ref) {
-        ref.style.opacity = '0';
-        ref.style.transform = 'translateY(40px)';
-        ref.style.transition = 'all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1)';
-        observer.observe(ref);
-      }
-    });
-
-    return () => observer.disconnect();
   }, []);
 
-  const addToRefs = (el) => {
-    if (el && !scrollRefs.current.includes(el)) {
-      scrollRefs.current.push(el);
-    }
-  };
-
   return (
-    <div className="page about-page">
+    <div className="page about-page-premium">
       {/* Hero */}
-      <section className="about-hero">
-        <div className="container about-hero-content animate-fade-up">
-          <h1>Our Story</h1>
+      <section className="about-hero-premium">
+        <motion.div 
+          className="container about-hero-content-premium"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
+          <h1>The Legacy of <span>Elegance</span></h1>
           <p>
-            Redefining ethnic fashion with a perfect blend of rich traditions and modern aesthetics.
-            Welcome to the world of Bharti Glooms.
+            Redefining ethnic fashion with a perfect blend of rich traditions and modern design.
+            Welcome to the luxurious world of Bharti Glooms.
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* Story Content */}
-      <section className="about-story">
+      <section className="about-story-premium">
         <div className="container">
-          <div className="about-story-grid">
-            <div className="story-content" ref={addToRefs}>
-              <div className="tag">Since 2014</div>
-              <h2>
+          <div className="about-story-grid-premium">
+            <motion.div 
+              className="story-content-premium"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+            >
+              <motion.div variants={fadeUp} className="tag-premium">Est. 2014</motion.div>
+              <motion.h2 variants={fadeUp}>
                 Crafting Elegance, <br />
                 <span>Weaving Memories.</span>
-              </h2>
-              <p>
+              </motion.h2>
+              <motion.p variants={fadeUp}>
                 Bharti Glooms started with a simple vision: to make premium ethnic wear accessible
-                to women across India who appreciate quality craftsmanship and timeless designs.
-              </p>
-              <p>
-                From a small boutique store in Surat, we have grown into a beloved national brand,
-                dressing thousands of women for their most special moments—weddings, festivals,
-                and celebrations.
-              </p>
+                to women across India who appreciate unmatched quality craftsmanship and timeless designs.
+              </motion.p>
+              <motion.p variants={fadeUp}>
+                From our origins in Surat, we've evolved into a prestigious national brand,
+                curating masterworks for life's most beautiful celebrations and milestones.
+              </motion.p>
+            </motion.div>
 
-            </div>
-
-            <div className="story-visual" ref={addToRefs} data-delay="3">
-              <div className="story-main-box">
-                <div className="story-main-icon">🥻</div>
+            <motion.div 
+              className="story-visual-premium"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="story-main-box-premium">
+                <div className="story-main-icon-premium">🥻</div>
               </div>
-              <div className="story-floating-stats">
-                <div className="story-stat-card">
-                  <div className="story-stat-number">10K+</div>
-                  <div className="story-stat-label">Happy Brides</div>
-                </div>
-              </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Values */}
-      <section className="about-values">
+      <section className="about-values-premium">
         <div className="container">
-          <div className="section-title text-center" ref={addToRefs}>Our Core <span>Values</span></div>
-          <p className="section-subtitle">The principles that guide our needle and thread.</p>
+          <motion.div 
+            className="section-title text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Our Core <span>Values</span>
+          </motion.div>
+          <motion.p 
+            className="section-subtitle text-center"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            The unwavering principles that guide every needle and thread.
+          </motion.p>
 
-          <div className="values-grid">
+          <motion.div 
+            className="values-grid-premium"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={staggerContainer}
+          >
             {values.map((v, i) => (
-              <div className="value-card" key={i} ref={addToRefs} data-delay={i + 1}>
-                <div className="value-icon">{v.icon}</div>
+              <motion.div variants={fadeUp} className="value-card-glass" key={i}>
+                <div className="value-icon-box">{v.icon}</div>
                 <h4>{v.title}</h4>
                 <p>{v.desc}</p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Team */}
-      <section className="about-team">
+      <section className="about-team-premium">
         <div className="container">
-          <div className="section-title text-center" ref={addToRefs}>Meet Our <span>Team</span></div>
-          <p className="section-subtitle">The passionate minds behind Bharti Glooms.</p>
+          <motion.div 
+            className="section-title text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Meet Our <span>Leaders</span>
+          </motion.div>
+          <motion.p 
+            className="section-subtitle text-center"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            The passionate architects behind the Bharti Glooms experience.
+          </motion.p>
 
-          <div className="team-grid">
+          <motion.div 
+            className="team-grid-premium"
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={staggerContainer}
+          >
             {team.map((t, i) => (
-              <div className="team-card" key={i} ref={addToRefs} data-delay={i + 2}>
-                <div className="team-img">
+              <motion.div variants={fadeUp} className="team-card-premium" key={i}>
+                <div className="team-img-wrapper">
                   <img src={t.img} alt={t.name} />
+                  <div className="team-social-overlay">
+                    <p className="team-bio">{t.bio}</p>
+                  </div>
                 </div>
-                <div className="team-info">
+                <div className="team-info-premium">
                   <h4 className="team-name">{t.name}</h4>
                   <div className="team-role">{t.role}</div>
-                  <p className="team-desc">{t.desc}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 

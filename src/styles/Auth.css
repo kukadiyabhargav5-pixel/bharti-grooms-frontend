@@ -15,7 +15,7 @@
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(58, 0, 15, 0.04) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(92, 15, 48, 0.04) 0%, transparent 70%);
   top: -200px;
   right: -200px;
   animation: float 15s ease-in-out infinite;
@@ -39,7 +39,7 @@
   width: 100%;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 50px 100px rgba(58, 0, 15, 0.12);
+  box-shadow: 0 50px 100px rgba(92, 15, 48, 0.12);
   position: relative;
   z-index: 1;
   background: rgba(255, 255, 255, 0.7);
@@ -51,7 +51,7 @@
 
 /* Auth Left Panel */
 .auth-panel {
-  background: linear-gradient(155deg, var(--maroon), var(--maroon-light) 60%, #c0392b);
+  background: linear-gradient(155deg, var(--maroon), var(--maroon-light) 60%, #B0255E);
   padding: 60px 50px;
   display: flex;
   flex-direction: column;
@@ -237,7 +237,7 @@
 .form-input {
   width: 100%;
   padding: 13px 15px 13px 44px;
-  border: 2px solid rgba(128, 0, 0, 0.12);
+  border: 2px solid rgba(139, 26, 74, 0.12);
   border-radius: 10px;
   font-size: 0.95rem;
   font-family: 'Poppins', sans-serif;
@@ -250,7 +250,7 @@
 .form-input:focus {
   border-color: var(--maroon);
   background: white;
-  box-shadow: 0 0 0 4px rgba(128, 0, 0, 0.08);
+  box-shadow: 0 0 0 4px rgba(139, 26, 74, 0.08);
 }
 
 .form-input:focus + .form-input-icon,
@@ -301,7 +301,7 @@
   cursor: pointer;
   transition: var(--transition);
   margin-top: 15px;
-  box-shadow: 0 10px 25px rgba(58, 0, 15, 0.2);
+  box-shadow: 0 10px 25px rgba(92, 15, 48, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -312,7 +312,7 @@
 .form-submit-btn:hover:not(:disabled) {
   transform: translateY(-3px);
   background: var(--maroon-light);
-  box-shadow: 0 15px 35px rgba(58, 0, 15, 0.3);
+  box-shadow: 0 15px 35px rgba(92, 15, 48, 0.3);
 }
 
 .form-submit-btn:disabled {
@@ -340,7 +340,7 @@
   content: '';
   flex: 1;
   height: 1.5px;
-  background: linear-gradient(to right, transparent, rgba(58, 0, 15, 0.15), transparent);
+  background: linear-gradient(to right, transparent, rgba(92, 15, 48, 0.15), transparent);
 }
 
 .google-login-container {
@@ -450,13 +450,13 @@
 .otp-header-icon {
   width: 70px;
   height: 70px;
-  background: rgba(128, 0, 32, 0.08);
+  background: rgba(139, 26, 74, 0.08);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 5px;
-  border: 1px solid rgba(128, 0, 32, 0.1);
+  border: 1px solid rgba(139, 26, 74, 0.1);
   color: var(--maroon);
   font-size: 1.8rem;
   animation: pulse-soft 2s infinite;
@@ -472,7 +472,7 @@
 .otp-digit {
   width: 50px;
   height: 60px;
-  border: 2px solid rgba(128, 0, 0, 0.15);
+  border: 2px solid rgba(139, 26, 74, 0.15);
   border-radius: 14px;
   text-align: center;
   font-size: 1.5rem;
@@ -486,14 +486,14 @@
 
 .otp-digit:focus {
   border-color: var(--maroon);
-  box-shadow: 0 10px 20px rgba(128, 0, 32, 0.1);
+  box-shadow: 0 10px 20px rgba(139, 26, 74, 0.1);
   transform: translateY(-4px);
   background: #fff;
 }
 
 .otp-digit.has-value {
   border-color: var(--maroon-light);
-  background: rgba(128, 0, 32, 0.02);
+  background: rgba(139, 26, 74, 0.02);
 }
 
 .otp-help-text {
@@ -519,9 +519,9 @@
 }
 
 @keyframes pulse-soft {
-  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(128, 0, 32, 0.2); }
-  70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(128, 0, 32, 0); }
-  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(128, 0, 32, 0); }
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(139, 26, 74, 0.2); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(139, 26, 74, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(139, 26, 74, 0); }
 }
 
 @keyframes shake {
