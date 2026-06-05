@@ -135,6 +135,21 @@ const ContactUs = () => {
             )}
           </div>
         </div>
+
+        {/* Google Map Section for Local SEO */}
+        <div className="map-container" style={{ marginTop: '60px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(139, 26, 74, 0.1)' }}>
+          <h2 style={{ textAlign: 'center', marginBottom: '20px', color: '#8B1A4A', fontFamily: "'Playfair Display', serif" }}>Find Us in Surat</h2>
+          <iframe 
+            src="https://maps.google.com/maps?q=Surat%20Textile%20Market,%20Surat,%20Gujarat&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+            width="100%" 
+            height="450" 
+            style={{ border: 0, display: 'block' }} 
+            allowFullScreen="" 
+            loading="lazy" 
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Bharti Glooms Store Location - Surat Textile Market"
+          ></iframe>
+        </div>
       </motion.div>
       <Footer />
     </div>
